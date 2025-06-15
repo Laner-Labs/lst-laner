@@ -37,8 +37,10 @@ jobs:
           
     - name: Build collector
       working-directory: ./collector-node
+      env:
+        SQLX_OFFLINE: true
       run: |
-        echo "Building collector-node..."
+        echo "Building collector-node in offline mode..."
         cargo build --release
         
     - name: Run collector

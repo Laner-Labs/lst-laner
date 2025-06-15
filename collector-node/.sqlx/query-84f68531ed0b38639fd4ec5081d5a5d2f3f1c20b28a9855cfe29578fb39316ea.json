@@ -1,0 +1,17 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            INSERT INTO lst_holder_data (lst_symbol, total_holders, total_supply, collected_at)\n            VALUES ($1, $2, $3, $4)\n            ON CONFLICT (lst_symbol, collected_at) \n            DO UPDATE SET \n                total_holders = EXCLUDED.total_holders,\n                total_supply = EXCLUDED.total_supply,\n                updated_at = NOW()\n            ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Varchar",
+        "Int8",
+        "Numeric",
+        "Timestamptz"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "84f68531ed0b38639fd4ec5081d5a5d2f3f1c20b28a9855cfe29578fb39316ea"
+}

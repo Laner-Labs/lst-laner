@@ -1,0 +1,16 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            INSERT INTO lst_tvl_data (lst_symbol, tvl_value, collected_at)\n            VALUES ($1, $2, $3)\n            ON CONFLICT (lst_symbol, collected_at) \n            DO UPDATE SET \n                tvl_value = EXCLUDED.tvl_value,\n                updated_at = NOW()\n            ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Varchar",
+        "Numeric",
+        "Timestamptz"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "562b526292b1fb2f5e7af159b50af43d933e675c5852ab0cba3f98051366a8fa"
+}

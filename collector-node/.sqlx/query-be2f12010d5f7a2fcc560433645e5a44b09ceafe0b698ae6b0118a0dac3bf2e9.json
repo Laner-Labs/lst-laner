@@ -1,0 +1,17 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            INSERT INTO lst_apy_data (lst_symbol, apy_type, apy_value, collected_at)\n            VALUES ($1, $2, $3, $4)\n            ON CONFLICT (lst_symbol, apy_type) \n            DO UPDATE SET \n                apy_value = EXCLUDED.apy_value,\n                collected_at = EXCLUDED.collected_at,\n                updated_at = NOW()\n            ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Varchar",
+        "Varchar",
+        "Numeric",
+        "Timestamptz"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "be2f12010d5f7a2fcc560433645e5a44b09ceafe0b698ae6b0118a0dac3bf2e9"
+}
