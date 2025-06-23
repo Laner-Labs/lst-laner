@@ -2,8 +2,26 @@
 
 @theme {
   --color-dull-white: #DECDC7;
+  --color-solana-green: #14F195;
+  --color-rich-black: #060201;
+  --color-text-white: #F5F5F5;
+  --color-light-gray: #232222;
+  --color-dark-gray: #161515;
 }
 
 body {
   font-family: var(--font-bricolage-grotesque), sans-serif;
+}
+
+/* Hide number input arrows */
+@layer utilities {
+  .no-spinner::-webkit-outer-spin-button,
+  .no-spinner::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .no-spinner {
+    -moz-appearance: textfield;
+  }
 }

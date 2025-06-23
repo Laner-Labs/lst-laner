@@ -1,5 +1,5 @@
 import Image from "next/image";
-import LoginButton from "@/components/LoginButton";
+import LoginButton from "@/components/login-button";
 
 export default function Home() {
   return (
