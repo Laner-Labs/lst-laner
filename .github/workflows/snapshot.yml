@@ -1,0 +1,60 @@
+name: Snapshot Node
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'snapshort-node/**'
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - 'snapshort-node/**'
+  schedule:
+    - cron: '0 0 */2 * *'  # Run every 2 days at midnight UTC
+  workflow_dispatch:
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        override: true
+        components: rustfmt, clippy
+        
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cargo/registry
+          ~/.cargo/git
+          snapshort-node/target
+        key: ${{ runner.os }}-snapshot-cargo-${{ hashFiles('snapshort-node/Cargo.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-snapshot-cargo-
+          
+    - name: Build snapshot node
+      working-directory: ./snapshort-node
+      env:
+        SQLX_OFFLINE: true
+      run: |
+        echo "Building snapshot-node in offline mode..."
+        cargo build --release
+        
+    - name: Run snapshot
+      working-directory: ./snapshort-node
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        SOLANA_RPC_URL: ${{ secrets.SOLANA_RPC_URL }}
+        RUST_LOG: info
+      run: |
+        echo "Starting snapshot process..."
+        ./target/release/snapshot-node
+        echo "Snapshot process completed successfully"
+      timeout-minutes: 30 
