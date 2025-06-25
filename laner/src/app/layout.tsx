@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import PrivyAppProvider from "@/providers/privy-provider";
+import { Toaster } from 'sonner'
+import WalletProvider from "@/providers/wallet-provider";
 
 const bricolageGrotesque = Bricolage_Grotesque({
   variable: "--font-bricolage-grotesque",
@@ -21,7 +23,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${bricolageGrotesque.variable}`}>
       <body>
-        <PrivyAppProvider>{children}</PrivyAppProvider>
+        <PrivyAppProvider>
+          <WalletProvider>
+            {children}
+            </WalletProvider>
+          </PrivyAppProvider>
+        <Toaster />
       </body>
     </html>
   );

@@ -1,6 +1,8 @@
+import { mainnet, baseSepolia, sepolia } from '@wagmi/core/chains'
+
 export interface ChainInfo {
   name: string;
-  id: string;
+  id: number;
   icon: string;
   isActive?: boolean;
 }
@@ -8,20 +10,14 @@ export interface ChainInfo {
 export const EVM_CHAINS: ChainInfo[] = [
   {
     name: 'Base',
-    id: 'base',
+    id: baseSepolia.id,
     icon: '/blockchians/base.svg',
     isActive: true
   },
   {
     name: 'Eth',
-    id: 'ethereum',
+    id: sepolia.id,
     icon: '/blockchians/eth.svg',
-    isActive: true
-  },
-  {
-    name: 'Sonic',
-    id: 'sonic',
-    icon: '/blockchians/sonic.svg',
     isActive: true
   }
 ];
@@ -29,7 +25,7 @@ export const EVM_CHAINS: ChainInfo[] = [
 export const SVM_CHAINS: ChainInfo[] = [
   {
     name: 'Solana',
-    id: 'solana',
+    id: 1,
     icon: '/blockchians/solana.svg',
     isActive: true
   }
