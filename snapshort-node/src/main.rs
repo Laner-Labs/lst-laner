@@ -414,7 +414,7 @@ async fn get_wallet_position(
     
     let token_accounts = solana_client.get_token_accounts_by_owner(
         &pubkey,
-        TokenAccountsFilter::ProgramId(spl_token::id())
+        TokenAccountsFilter::ProgramId(spl_token::ID)
     ).await?;
     
     let mut max_value = BigDecimal::from(0);
