@@ -26,8 +26,8 @@ export default function RootLayout({
         <PrivyAppProvider>
           <WalletProvider>
             {children}
-            </WalletProvider>
-          </PrivyAppProvider>
+          </WalletProvider>
+        </PrivyAppProvider>
         <Toaster />
       </body>
     </html>

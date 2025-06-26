@@ -7,6 +7,8 @@
   --color-text-white: #F5F5F5;
   --color-light-gray: #232222;
   --color-dark-gray: #161515;
+  --color-button-background: #545454;
+  --color-card-background: #1A1A1A;
 }
 
 body {
