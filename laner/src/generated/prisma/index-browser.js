@@ -143,7 +143,7 @@ exports.Prisma.Api_request_logsScalarFieldEnum = {
 exports.Prisma.DepositsScalarFieldEnum = {
   id: 'id',
   user_id: 'user_id',
-  amount_sol: 'amount_sol',
+  amount: 'amount',
   type: 'type',
   source_chain: 'source_chain',
   tx_hash: 'tx_hash',
@@ -218,11 +218,19 @@ exports.Prisma.UsersScalarFieldEnum = {
 exports.Prisma.WithdrawalsScalarFieldEnum = {
   id: 'id',
   user_id: 'user_id',
-  amount_sol: 'amount_sol',
+  amount: 'amount',
   type: 'type',
   destination_chain: 'destination_chain',
   tx_hash: 'tx_hash',
   withdrawn_at: 'withdrawn_at'
+};
+
+exports.Prisma.User_earningsScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  epoch_snapshot_id: 'epoch_snapshot_id',
+  earned_value: 'earned_value',
+  calculated_at: 'calculated_at'
 };
 
 exports.Prisma.SortOrder = {
@@ -253,7 +261,8 @@ exports.Prisma.ModelName = {
   lst_tvl_data: 'lst_tvl_data',
   user_snapshots: 'user_snapshots',
   users: 'users',
-  withdrawals: 'withdrawals'
+  withdrawals: 'withdrawals',
+  user_earnings: 'user_earnings'
 };
 
 /**

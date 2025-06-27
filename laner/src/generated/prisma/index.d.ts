@@ -73,6 +73,11 @@ export type users = $Result.DefaultSelection<Prisma.$usersPayload>
  * This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
  */
 export type withdrawals = $Result.DefaultSelection<Prisma.$withdrawalsPayload>
+/**
+ * Model user_earnings
+ * 
+ */
+export type user_earnings = $Result.DefaultSelection<Prisma.$user_earningsPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -318,6 +323,16 @@ export class PrismaClient<
     * ```
     */
   get withdrawals(): Prisma.withdrawalsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.user_earnings`: Exposes CRUD operations for the **user_earnings** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more User_earnings
+    * const user_earnings = await prisma.user_earnings.findMany()
+    * ```
+    */
+  get user_earnings(): Prisma.user_earningsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -769,7 +784,8 @@ export namespace Prisma {
     lst_tvl_data: 'lst_tvl_data',
     user_snapshots: 'user_snapshots',
     users: 'users',
-    withdrawals: 'withdrawals'
+    withdrawals: 'withdrawals',
+    user_earnings: 'user_earnings'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -788,7 +804,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "sqlx_migrations" | "api_request_logs" | "deposits" | "epoch_snapshots" | "lst_apy_data" | "lst_holder_data" | "lst_strategy" | "lst_tokens" | "lst_tvl_data" | "user_snapshots" | "users" | "withdrawals"
+      modelProps: "sqlx_migrations" | "api_request_logs" | "deposits" | "epoch_snapshots" | "lst_apy_data" | "lst_holder_data" | "lst_strategy" | "lst_tokens" | "lst_tvl_data" | "user_snapshots" | "users" | "withdrawals" | "user_earnings"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1680,6 +1696,80 @@ export namespace Prisma {
           }
         }
       }
+      user_earnings: {
+        payload: Prisma.$user_earningsPayload<ExtArgs>
+        fields: Prisma.user_earningsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.user_earningsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$user_earningsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.user_earningsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$user_earningsPayload>
+          }
+          findFirst: {
+            args: Prisma.user_earningsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$user_earningsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.user_earningsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$user_earningsPayload>
+          }
+          findMany: {
+            args: Prisma.user_earningsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$user_earningsPayload>[]
+          }
+          create: {
+            args: Prisma.user_earningsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$user_earningsPayload>
+          }
+          createMany: {
+            args: Prisma.user_earningsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.user_earningsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$user_earningsPayload>[]
+          }
+          delete: {
+            args: Prisma.user_earningsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$user_earningsPayload>
+          }
+          update: {
+            args: Prisma.user_earningsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$user_earningsPayload>
+          }
+          deleteMany: {
+            args: Prisma.user_earningsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.user_earningsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.user_earningsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$user_earningsPayload>[]
+          }
+          upsert: {
+            args: Prisma.user_earningsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$user_earningsPayload>
+          }
+          aggregate: {
+            args: Prisma.User_earningsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUser_earnings>
+          }
+          groupBy: {
+            args: Prisma.user_earningsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<User_earningsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.user_earningsCountArgs<ExtArgs>
+            result: $Utils.Optional<User_earningsCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1776,6 +1866,7 @@ export namespace Prisma {
     user_snapshots?: user_snapshotsOmit
     users?: usersOmit
     withdrawals?: withdrawalsOmit
+    user_earnings?: user_earningsOmit
   }
 
   /* Types for Logging */
@@ -1870,10 +1961,12 @@ export namespace Prisma {
    */
 
   export type Epoch_snapshotsCountOutputType = {
+    user_earnings: number
     user_snapshots: number
   }
 
   export type Epoch_snapshotsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user_earnings?: boolean | Epoch_snapshotsCountOutputTypeCountUser_earningsArgs
     user_snapshots?: boolean | Epoch_snapshotsCountOutputTypeCountUser_snapshotsArgs
   }
 
@@ -1891,6 +1984,13 @@ export namespace Prisma {
   /**
    * Epoch_snapshotsCountOutputType without action
    */
+  export type Epoch_snapshotsCountOutputTypeCountUser_earningsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: user_earningsWhereInput
+  }
+
+  /**
+   * Epoch_snapshotsCountOutputType without action
+   */
   export type Epoch_snapshotsCountOutputTypeCountUser_snapshotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: user_snapshotsWhereInput
   }
@@ -1902,12 +2002,14 @@ export namespace Prisma {
 
   export type UsersCountOutputType = {
     deposits: number
+    user_earnings: number
     user_snapshots: number
     withdrawals: number
   }
 
   export type UsersCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     deposits?: boolean | UsersCountOutputTypeCountDepositsArgs
+    user_earnings?: boolean | UsersCountOutputTypeCountUser_earningsArgs
     user_snapshots?: boolean | UsersCountOutputTypeCountUser_snapshotsArgs
     withdrawals?: boolean | UsersCountOutputTypeCountWithdrawalsArgs
   }
@@ -1928,6 +2030,13 @@ export namespace Prisma {
    */
   export type UsersCountOutputTypeCountDepositsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: depositsWhereInput
+  }
+
+  /**
+   * UsersCountOutputType without action
+   */
+  export type UsersCountOutputTypeCountUser_earningsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: user_earningsWhereInput
   }
 
   /**
@@ -4080,17 +4189,17 @@ export namespace Prisma {
   }
 
   export type DepositsAvgAggregateOutputType = {
-    amount_sol: Decimal | null
+    amount: Decimal | null
   }
 
   export type DepositsSumAggregateOutputType = {
-    amount_sol: Decimal | null
+    amount: Decimal | null
   }
 
   export type DepositsMinAggregateOutputType = {
     id: string | null
     user_id: string | null
-    amount_sol: Decimal | null
+    amount: Decimal | null
     type: string | null
     source_chain: string | null
     tx_hash: string | null
@@ -4100,7 +4209,7 @@ export namespace Prisma {
   export type DepositsMaxAggregateOutputType = {
     id: string | null
     user_id: string | null
-    amount_sol: Decimal | null
+    amount: Decimal | null
     type: string | null
     source_chain: string | null
     tx_hash: string | null
@@ -4110,7 +4219,7 @@ export namespace Prisma {
   export type DepositsCountAggregateOutputType = {
     id: number
     user_id: number
-    amount_sol: number
+    amount: number
     type: number
     source_chain: number
     tx_hash: number
@@ -4120,17 +4229,17 @@ export namespace Prisma {
 
 
   export type DepositsAvgAggregateInputType = {
-    amount_sol?: true
+    amount?: true
   }
 
   export type DepositsSumAggregateInputType = {
-    amount_sol?: true
+    amount?: true
   }
 
   export type DepositsMinAggregateInputType = {
     id?: true
     user_id?: true
-    amount_sol?: true
+    amount?: true
     type?: true
     source_chain?: true
     tx_hash?: true
@@ -4140,7 +4249,7 @@ export namespace Prisma {
   export type DepositsMaxAggregateInputType = {
     id?: true
     user_id?: true
-    amount_sol?: true
+    amount?: true
     type?: true
     source_chain?: true
     tx_hash?: true
@@ -4150,7 +4259,7 @@ export namespace Prisma {
   export type DepositsCountAggregateInputType = {
     id?: true
     user_id?: true
-    amount_sol?: true
+    amount?: true
     type?: true
     source_chain?: true
     tx_hash?: true
@@ -4247,7 +4356,7 @@ export namespace Prisma {
   export type DepositsGroupByOutputType = {
     id: string
     user_id: string
-    amount_sol: Decimal
+    amount: Decimal
     type: string
     source_chain: string
     tx_hash: string
@@ -4276,7 +4385,7 @@ export namespace Prisma {
   export type depositsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     user_id?: boolean
-    amount_sol?: boolean
+    amount?: boolean
     type?: boolean
     source_chain?: boolean
     tx_hash?: boolean
@@ -4287,7 +4396,7 @@ export namespace Prisma {
   export type depositsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     user_id?: boolean
-    amount_sol?: boolean
+    amount?: boolean
     type?: boolean
     source_chain?: boolean
     tx_hash?: boolean
@@ -4298,7 +4407,7 @@ export namespace Prisma {
   export type depositsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     user_id?: boolean
-    amount_sol?: boolean
+    amount?: boolean
     type?: boolean
     source_chain?: boolean
     tx_hash?: boolean
@@ -4309,14 +4418,14 @@ export namespace Prisma {
   export type depositsSelectScalar = {
     id?: boolean
     user_id?: boolean
-    amount_sol?: boolean
+    amount?: boolean
     type?: boolean
     source_chain?: boolean
     tx_hash?: boolean
     deposited_at?: boolean
   }
 
-  export type depositsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "amount_sol" | "type" | "source_chain" | "tx_hash" | "deposited_at", ExtArgs["result"]["deposits"]>
+  export type depositsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "amount" | "type" | "source_chain" | "tx_hash" | "deposited_at", ExtArgs["result"]["deposits"]>
   export type depositsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | usersDefaultArgs<ExtArgs>
   }
@@ -4335,7 +4444,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       user_id: string
-      amount_sol: Prisma.Decimal
+      amount: Prisma.Decimal
       type: string
       source_chain: string
       tx_hash: string
@@ -4766,7 +4875,7 @@ export namespace Prisma {
   interface depositsFieldRefs {
     readonly id: FieldRef<"deposits", 'String'>
     readonly user_id: FieldRef<"deposits", 'String'>
-    readonly amount_sol: FieldRef<"deposits", 'Decimal'>
+    readonly amount: FieldRef<"deposits", 'Decimal'>
     readonly type: FieldRef<"deposits", 'String'>
     readonly source_chain: FieldRef<"deposits", 'String'>
     readonly tx_hash: FieldRef<"deposits", 'String'>
@@ -5368,6 +5477,7 @@ export namespace Prisma {
     epoch?: boolean
     snapshot_time?: boolean
     lst_strategy?: boolean | epoch_snapshots$lst_strategyArgs<ExtArgs>
+    user_earnings?: boolean | epoch_snapshots$user_earningsArgs<ExtArgs>
     user_snapshots?: boolean | epoch_snapshots$user_snapshotsArgs<ExtArgs>
     _count?: boolean | Epoch_snapshotsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["epoch_snapshots"]>
@@ -5393,6 +5503,7 @@ export namespace Prisma {
   export type epoch_snapshotsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "epoch" | "snapshot_time", ExtArgs["result"]["epoch_snapshots"]>
   export type epoch_snapshotsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     lst_strategy?: boolean | epoch_snapshots$lst_strategyArgs<ExtArgs>
+    user_earnings?: boolean | epoch_snapshots$user_earningsArgs<ExtArgs>
     user_snapshots?: boolean | epoch_snapshots$user_snapshotsArgs<ExtArgs>
     _count?: boolean | Epoch_snapshotsCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -5403,6 +5514,7 @@ export namespace Prisma {
     name: "epoch_snapshots"
     objects: {
       lst_strategy: Prisma.$lst_strategyPayload<ExtArgs> | null
+      user_earnings: Prisma.$user_earningsPayload<ExtArgs>[]
       user_snapshots: Prisma.$user_snapshotsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -5804,6 +5916,7 @@ export namespace Prisma {
   export interface Prisma__epoch_snapshotsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     lst_strategy<T extends epoch_snapshots$lst_strategyArgs<ExtArgs> = {}>(args?: Subset<T, epoch_snapshots$lst_strategyArgs<ExtArgs>>): Prisma__lst_strategyClient<$Result.GetResult<Prisma.$lst_strategyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    user_earnings<T extends epoch_snapshots$user_earningsArgs<ExtArgs> = {}>(args?: Subset<T, epoch_snapshots$user_earningsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_earningsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     user_snapshots<T extends epoch_snapshots$user_snapshotsArgs<ExtArgs> = {}>(args?: Subset<T, epoch_snapshots$user_snapshotsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_snapshotsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -6241,6 +6354,30 @@ export namespace Prisma {
      */
     include?: lst_strategyInclude<ExtArgs> | null
     where?: lst_strategyWhereInput
+  }
+
+  /**
+   * epoch_snapshots.user_earnings
+   */
+  export type epoch_snapshots$user_earningsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_earnings
+     */
+    select?: user_earningsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_earnings
+     */
+    omit?: user_earningsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_earningsInclude<ExtArgs> | null
+    where?: user_earningsWhereInput
+    orderBy?: user_earningsOrderByWithRelationInput | user_earningsOrderByWithRelationInput[]
+    cursor?: user_earningsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: User_earningsScalarFieldEnum | User_earningsScalarFieldEnum[]
   }
 
   /**
@@ -12744,6 +12881,7 @@ export namespace Prisma {
     created_at?: boolean
     privy_id?: boolean
     deposits?: boolean | users$depositsArgs<ExtArgs>
+    user_earnings?: boolean | users$user_earningsArgs<ExtArgs>
     user_snapshots?: boolean | users$user_snapshotsArgs<ExtArgs>
     withdrawals?: boolean | users$withdrawalsArgs<ExtArgs>
     _count?: boolean | UsersCountOutputTypeDefaultArgs<ExtArgs>
@@ -12770,6 +12908,7 @@ export namespace Prisma {
   export type usersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "created_at" | "privy_id", ExtArgs["result"]["users"]>
   export type usersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     deposits?: boolean | users$depositsArgs<ExtArgs>
+    user_earnings?: boolean | users$user_earningsArgs<ExtArgs>
     user_snapshots?: boolean | users$user_snapshotsArgs<ExtArgs>
     withdrawals?: boolean | users$withdrawalsArgs<ExtArgs>
     _count?: boolean | UsersCountOutputTypeDefaultArgs<ExtArgs>
@@ -12781,6 +12920,7 @@ export namespace Prisma {
     name: "users"
     objects: {
       deposits: Prisma.$depositsPayload<ExtArgs>[]
+      user_earnings: Prisma.$user_earningsPayload<ExtArgs>[]
       user_snapshots: Prisma.$user_snapshotsPayload<ExtArgs>[]
       withdrawals: Prisma.$withdrawalsPayload<ExtArgs>[]
     }
@@ -13183,6 +13323,7 @@ export namespace Prisma {
   export interface Prisma__usersClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     deposits<T extends users$depositsArgs<ExtArgs> = {}>(args?: Subset<T, users$depositsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$depositsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    user_earnings<T extends users$user_earningsArgs<ExtArgs> = {}>(args?: Subset<T, users$user_earningsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_earningsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     user_snapshots<T extends users$user_snapshotsArgs<ExtArgs> = {}>(args?: Subset<T, users$user_snapshotsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_snapshotsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     withdrawals<T extends users$withdrawalsArgs<ExtArgs> = {}>(args?: Subset<T, users$withdrawalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$withdrawalsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -13629,6 +13770,30 @@ export namespace Prisma {
   }
 
   /**
+   * users.user_earnings
+   */
+  export type users$user_earningsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_earnings
+     */
+    select?: user_earningsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_earnings
+     */
+    omit?: user_earningsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_earningsInclude<ExtArgs> | null
+    where?: user_earningsWhereInput
+    orderBy?: user_earningsOrderByWithRelationInput | user_earningsOrderByWithRelationInput[]
+    cursor?: user_earningsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: User_earningsScalarFieldEnum | User_earningsScalarFieldEnum[]
+  }
+
+  /**
    * users.user_snapshots
    */
   export type users$user_snapshotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13708,17 +13873,17 @@ export namespace Prisma {
   }
 
   export type WithdrawalsAvgAggregateOutputType = {
-    amount_sol: Decimal | null
+    amount: Decimal | null
   }
 
   export type WithdrawalsSumAggregateOutputType = {
-    amount_sol: Decimal | null
+    amount: Decimal | null
   }
 
   export type WithdrawalsMinAggregateOutputType = {
     id: string | null
     user_id: string | null
-    amount_sol: Decimal | null
+    amount: Decimal | null
     type: string | null
     destination_chain: string | null
     tx_hash: string | null
@@ -13728,7 +13893,7 @@ export namespace Prisma {
   export type WithdrawalsMaxAggregateOutputType = {
     id: string | null
     user_id: string | null
-    amount_sol: Decimal | null
+    amount: Decimal | null
     type: string | null
     destination_chain: string | null
     tx_hash: string | null
@@ -13738,7 +13903,7 @@ export namespace Prisma {
   export type WithdrawalsCountAggregateOutputType = {
     id: number
     user_id: number
-    amount_sol: number
+    amount: number
     type: number
     destination_chain: number
     tx_hash: number
@@ -13748,17 +13913,17 @@ export namespace Prisma {
 
 
   export type WithdrawalsAvgAggregateInputType = {
-    amount_sol?: true
+    amount?: true
   }
 
   export type WithdrawalsSumAggregateInputType = {
-    amount_sol?: true
+    amount?: true
   }
 
   export type WithdrawalsMinAggregateInputType = {
     id?: true
     user_id?: true
-    amount_sol?: true
+    amount?: true
     type?: true
     destination_chain?: true
     tx_hash?: true
@@ -13768,7 +13933,7 @@ export namespace Prisma {
   export type WithdrawalsMaxAggregateInputType = {
     id?: true
     user_id?: true
-    amount_sol?: true
+    amount?: true
     type?: true
     destination_chain?: true
     tx_hash?: true
@@ -13778,7 +13943,7 @@ export namespace Prisma {
   export type WithdrawalsCountAggregateInputType = {
     id?: true
     user_id?: true
-    amount_sol?: true
+    amount?: true
     type?: true
     destination_chain?: true
     tx_hash?: true
@@ -13875,7 +14040,7 @@ export namespace Prisma {
   export type WithdrawalsGroupByOutputType = {
     id: string
     user_id: string
-    amount_sol: Decimal
+    amount: Decimal
     type: string
     destination_chain: string
     tx_hash: string | null
@@ -13904,7 +14069,7 @@ export namespace Prisma {
   export type withdrawalsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     user_id?: boolean
-    amount_sol?: boolean
+    amount?: boolean
     type?: boolean
     destination_chain?: boolean
     tx_hash?: boolean
@@ -13915,7 +14080,7 @@ export namespace Prisma {
   export type withdrawalsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     user_id?: boolean
-    amount_sol?: boolean
+    amount?: boolean
     type?: boolean
     destination_chain?: boolean
     tx_hash?: boolean
@@ -13926,7 +14091,7 @@ export namespace Prisma {
   export type withdrawalsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     user_id?: boolean
-    amount_sol?: boolean
+    amount?: boolean
     type?: boolean
     destination_chain?: boolean
     tx_hash?: boolean
@@ -13937,14 +14102,14 @@ export namespace Prisma {
   export type withdrawalsSelectScalar = {
     id?: boolean
     user_id?: boolean
-    amount_sol?: boolean
+    amount?: boolean
     type?: boolean
     destination_chain?: boolean
     tx_hash?: boolean
     withdrawn_at?: boolean
   }
 
-  export type withdrawalsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "amount_sol" | "type" | "destination_chain" | "tx_hash" | "withdrawn_at", ExtArgs["result"]["withdrawals"]>
+  export type withdrawalsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "amount" | "type" | "destination_chain" | "tx_hash" | "withdrawn_at", ExtArgs["result"]["withdrawals"]>
   export type withdrawalsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | usersDefaultArgs<ExtArgs>
   }
@@ -13963,7 +14128,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       user_id: string
-      amount_sol: Prisma.Decimal
+      amount: Prisma.Decimal
       type: string
       destination_chain: string
       tx_hash: string | null
@@ -14394,7 +14559,7 @@ export namespace Prisma {
   interface withdrawalsFieldRefs {
     readonly id: FieldRef<"withdrawals", 'String'>
     readonly user_id: FieldRef<"withdrawals", 'String'>
-    readonly amount_sol: FieldRef<"withdrawals", 'Decimal'>
+    readonly amount: FieldRef<"withdrawals", 'Decimal'>
     readonly type: FieldRef<"withdrawals", 'String'>
     readonly destination_chain: FieldRef<"withdrawals", 'String'>
     readonly tx_hash: FieldRef<"withdrawals", 'String'>
@@ -14814,6 +14979,1106 @@ export namespace Prisma {
 
 
   /**
+   * Model user_earnings
+   */
+
+  export type AggregateUser_earnings = {
+    _count: User_earningsCountAggregateOutputType | null
+    _avg: User_earningsAvgAggregateOutputType | null
+    _sum: User_earningsSumAggregateOutputType | null
+    _min: User_earningsMinAggregateOutputType | null
+    _max: User_earningsMaxAggregateOutputType | null
+  }
+
+  export type User_earningsAvgAggregateOutputType = {
+    earned_value: Decimal | null
+  }
+
+  export type User_earningsSumAggregateOutputType = {
+    earned_value: Decimal | null
+  }
+
+  export type User_earningsMinAggregateOutputType = {
+    id: string | null
+    user_id: string | null
+    epoch_snapshot_id: string | null
+    earned_value: Decimal | null
+    calculated_at: Date | null
+  }
+
+  export type User_earningsMaxAggregateOutputType = {
+    id: string | null
+    user_id: string | null
+    epoch_snapshot_id: string | null
+    earned_value: Decimal | null
+    calculated_at: Date | null
+  }
+
+  export type User_earningsCountAggregateOutputType = {
+    id: number
+    user_id: number
+    epoch_snapshot_id: number
+    earned_value: number
+    calculated_at: number
+    _all: number
+  }
+
+
+  export type User_earningsAvgAggregateInputType = {
+    earned_value?: true
+  }
+
+  export type User_earningsSumAggregateInputType = {
+    earned_value?: true
+  }
+
+  export type User_earningsMinAggregateInputType = {
+    id?: true
+    user_id?: true
+    epoch_snapshot_id?: true
+    earned_value?: true
+    calculated_at?: true
+  }
+
+  export type User_earningsMaxAggregateInputType = {
+    id?: true
+    user_id?: true
+    epoch_snapshot_id?: true
+    earned_value?: true
+    calculated_at?: true
+  }
+
+  export type User_earningsCountAggregateInputType = {
+    id?: true
+    user_id?: true
+    epoch_snapshot_id?: true
+    earned_value?: true
+    calculated_at?: true
+    _all?: true
+  }
+
+  export type User_earningsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which user_earnings to aggregate.
+     */
+    where?: user_earningsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of user_earnings to fetch.
+     */
+    orderBy?: user_earningsOrderByWithRelationInput | user_earningsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: user_earningsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` user_earnings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` user_earnings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned user_earnings
+    **/
+    _count?: true | User_earningsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: User_earningsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: User_earningsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: User_earningsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: User_earningsMaxAggregateInputType
+  }
+
+  export type GetUser_earningsAggregateType<T extends User_earningsAggregateArgs> = {
+        [P in keyof T & keyof AggregateUser_earnings]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUser_earnings[P]>
+      : GetScalarType<T[P], AggregateUser_earnings[P]>
+  }
+
+
+
+
+  export type user_earningsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: user_earningsWhereInput
+    orderBy?: user_earningsOrderByWithAggregationInput | user_earningsOrderByWithAggregationInput[]
+    by: User_earningsScalarFieldEnum[] | User_earningsScalarFieldEnum
+    having?: user_earningsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: User_earningsCountAggregateInputType | true
+    _avg?: User_earningsAvgAggregateInputType
+    _sum?: User_earningsSumAggregateInputType
+    _min?: User_earningsMinAggregateInputType
+    _max?: User_earningsMaxAggregateInputType
+  }
+
+  export type User_earningsGroupByOutputType = {
+    id: string
+    user_id: string
+    epoch_snapshot_id: string
+    earned_value: Decimal
+    calculated_at: Date
+    _count: User_earningsCountAggregateOutputType | null
+    _avg: User_earningsAvgAggregateOutputType | null
+    _sum: User_earningsSumAggregateOutputType | null
+    _min: User_earningsMinAggregateOutputType | null
+    _max: User_earningsMaxAggregateOutputType | null
+  }
+
+  type GetUser_earningsGroupByPayload<T extends user_earningsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<User_earningsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof User_earningsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], User_earningsGroupByOutputType[P]>
+            : GetScalarType<T[P], User_earningsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type user_earningsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    epoch_snapshot_id?: boolean
+    earned_value?: boolean
+    calculated_at?: boolean
+    epoch_snapshots?: boolean | epoch_snapshotsDefaultArgs<ExtArgs>
+    users?: boolean | usersDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["user_earnings"]>
+
+  export type user_earningsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    epoch_snapshot_id?: boolean
+    earned_value?: boolean
+    calculated_at?: boolean
+    epoch_snapshots?: boolean | epoch_snapshotsDefaultArgs<ExtArgs>
+    users?: boolean | usersDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["user_earnings"]>
+
+  export type user_earningsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    epoch_snapshot_id?: boolean
+    earned_value?: boolean
+    calculated_at?: boolean
+    epoch_snapshots?: boolean | epoch_snapshotsDefaultArgs<ExtArgs>
+    users?: boolean | usersDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["user_earnings"]>
+
+  export type user_earningsSelectScalar = {
+    id?: boolean
+    user_id?: boolean
+    epoch_snapshot_id?: boolean
+    earned_value?: boolean
+    calculated_at?: boolean
+  }
+
+  export type user_earningsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "epoch_snapshot_id" | "earned_value" | "calculated_at", ExtArgs["result"]["user_earnings"]>
+  export type user_earningsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    epoch_snapshots?: boolean | epoch_snapshotsDefaultArgs<ExtArgs>
+    users?: boolean | usersDefaultArgs<ExtArgs>
+  }
+  export type user_earningsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    epoch_snapshots?: boolean | epoch_snapshotsDefaultArgs<ExtArgs>
+    users?: boolean | usersDefaultArgs<ExtArgs>
+  }
+  export type user_earningsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    epoch_snapshots?: boolean | epoch_snapshotsDefaultArgs<ExtArgs>
+    users?: boolean | usersDefaultArgs<ExtArgs>
+  }
+
+  export type $user_earningsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "user_earnings"
+    objects: {
+      epoch_snapshots: Prisma.$epoch_snapshotsPayload<ExtArgs>
+      users: Prisma.$usersPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      user_id: string
+      epoch_snapshot_id: string
+      earned_value: Prisma.Decimal
+      calculated_at: Date
+    }, ExtArgs["result"]["user_earnings"]>
+    composites: {}
+  }
+
+  type user_earningsGetPayload<S extends boolean | null | undefined | user_earningsDefaultArgs> = $Result.GetResult<Prisma.$user_earningsPayload, S>
+
+  type user_earningsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<user_earningsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: User_earningsCountAggregateInputType | true
+    }
+
+  export interface user_earningsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['user_earnings'], meta: { name: 'user_earnings' } }
+    /**
+     * Find zero or one User_earnings that matches the filter.
+     * @param {user_earningsFindUniqueArgs} args - Arguments to find a User_earnings
+     * @example
+     * // Get one User_earnings
+     * const user_earnings = await prisma.user_earnings.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends user_earningsFindUniqueArgs>(args: SelectSubset<T, user_earningsFindUniqueArgs<ExtArgs>>): Prisma__user_earningsClient<$Result.GetResult<Prisma.$user_earningsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one User_earnings that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {user_earningsFindUniqueOrThrowArgs} args - Arguments to find a User_earnings
+     * @example
+     * // Get one User_earnings
+     * const user_earnings = await prisma.user_earnings.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends user_earningsFindUniqueOrThrowArgs>(args: SelectSubset<T, user_earningsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__user_earningsClient<$Result.GetResult<Prisma.$user_earningsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first User_earnings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {user_earningsFindFirstArgs} args - Arguments to find a User_earnings
+     * @example
+     * // Get one User_earnings
+     * const user_earnings = await prisma.user_earnings.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends user_earningsFindFirstArgs>(args?: SelectSubset<T, user_earningsFindFirstArgs<ExtArgs>>): Prisma__user_earningsClient<$Result.GetResult<Prisma.$user_earningsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first User_earnings that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {user_earningsFindFirstOrThrowArgs} args - Arguments to find a User_earnings
+     * @example
+     * // Get one User_earnings
+     * const user_earnings = await prisma.user_earnings.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends user_earningsFindFirstOrThrowArgs>(args?: SelectSubset<T, user_earningsFindFirstOrThrowArgs<ExtArgs>>): Prisma__user_earningsClient<$Result.GetResult<Prisma.$user_earningsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more User_earnings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {user_earningsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all User_earnings
+     * const user_earnings = await prisma.user_earnings.findMany()
+     * 
+     * // Get first 10 User_earnings
+     * const user_earnings = await prisma.user_earnings.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const user_earningsWithIdOnly = await prisma.user_earnings.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends user_earningsFindManyArgs>(args?: SelectSubset<T, user_earningsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_earningsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a User_earnings.
+     * @param {user_earningsCreateArgs} args - Arguments to create a User_earnings.
+     * @example
+     * // Create one User_earnings
+     * const User_earnings = await prisma.user_earnings.create({
+     *   data: {
+     *     // ... data to create a User_earnings
+     *   }
+     * })
+     * 
+     */
+    create<T extends user_earningsCreateArgs>(args: SelectSubset<T, user_earningsCreateArgs<ExtArgs>>): Prisma__user_earningsClient<$Result.GetResult<Prisma.$user_earningsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many User_earnings.
+     * @param {user_earningsCreateManyArgs} args - Arguments to create many User_earnings.
+     * @example
+     * // Create many User_earnings
+     * const user_earnings = await prisma.user_earnings.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends user_earningsCreateManyArgs>(args?: SelectSubset<T, user_earningsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many User_earnings and returns the data saved in the database.
+     * @param {user_earningsCreateManyAndReturnArgs} args - Arguments to create many User_earnings.
+     * @example
+     * // Create many User_earnings
+     * const user_earnings = await prisma.user_earnings.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many User_earnings and only return the `id`
+     * const user_earningsWithIdOnly = await prisma.user_earnings.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends user_earningsCreateManyAndReturnArgs>(args?: SelectSubset<T, user_earningsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_earningsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a User_earnings.
+     * @param {user_earningsDeleteArgs} args - Arguments to delete one User_earnings.
+     * @example
+     * // Delete one User_earnings
+     * const User_earnings = await prisma.user_earnings.delete({
+     *   where: {
+     *     // ... filter to delete one User_earnings
+     *   }
+     * })
+     * 
+     */
+    delete<T extends user_earningsDeleteArgs>(args: SelectSubset<T, user_earningsDeleteArgs<ExtArgs>>): Prisma__user_earningsClient<$Result.GetResult<Prisma.$user_earningsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one User_earnings.
+     * @param {user_earningsUpdateArgs} args - Arguments to update one User_earnings.
+     * @example
+     * // Update one User_earnings
+     * const user_earnings = await prisma.user_earnings.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends user_earningsUpdateArgs>(args: SelectSubset<T, user_earningsUpdateArgs<ExtArgs>>): Prisma__user_earningsClient<$Result.GetResult<Prisma.$user_earningsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more User_earnings.
+     * @param {user_earningsDeleteManyArgs} args - Arguments to filter User_earnings to delete.
+     * @example
+     * // Delete a few User_earnings
+     * const { count } = await prisma.user_earnings.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends user_earningsDeleteManyArgs>(args?: SelectSubset<T, user_earningsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more User_earnings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {user_earningsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many User_earnings
+     * const user_earnings = await prisma.user_earnings.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends user_earningsUpdateManyArgs>(args: SelectSubset<T, user_earningsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more User_earnings and returns the data updated in the database.
+     * @param {user_earningsUpdateManyAndReturnArgs} args - Arguments to update many User_earnings.
+     * @example
+     * // Update many User_earnings
+     * const user_earnings = await prisma.user_earnings.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more User_earnings and only return the `id`
+     * const user_earningsWithIdOnly = await prisma.user_earnings.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends user_earningsUpdateManyAndReturnArgs>(args: SelectSubset<T, user_earningsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_earningsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one User_earnings.
+     * @param {user_earningsUpsertArgs} args - Arguments to update or create a User_earnings.
+     * @example
+     * // Update or create a User_earnings
+     * const user_earnings = await prisma.user_earnings.upsert({
+     *   create: {
+     *     // ... data to create a User_earnings
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the User_earnings we want to update
+     *   }
+     * })
+     */
+    upsert<T extends user_earningsUpsertArgs>(args: SelectSubset<T, user_earningsUpsertArgs<ExtArgs>>): Prisma__user_earningsClient<$Result.GetResult<Prisma.$user_earningsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of User_earnings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {user_earningsCountArgs} args - Arguments to filter User_earnings to count.
+     * @example
+     * // Count the number of User_earnings
+     * const count = await prisma.user_earnings.count({
+     *   where: {
+     *     // ... the filter for the User_earnings we want to count
+     *   }
+     * })
+    **/
+    count<T extends user_earningsCountArgs>(
+      args?: Subset<T, user_earningsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], User_earningsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a User_earnings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {User_earningsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends User_earningsAggregateArgs>(args: Subset<T, User_earningsAggregateArgs>): Prisma.PrismaPromise<GetUser_earningsAggregateType<T>>
+
+    /**
+     * Group by User_earnings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {user_earningsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends user_earningsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: user_earningsGroupByArgs['orderBy'] }
+        : { orderBy?: user_earningsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, user_earningsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUser_earningsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the user_earnings model
+   */
+  readonly fields: user_earningsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for user_earnings.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__user_earningsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    epoch_snapshots<T extends epoch_snapshotsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, epoch_snapshotsDefaultArgs<ExtArgs>>): Prisma__epoch_snapshotsClient<$Result.GetResult<Prisma.$epoch_snapshotsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    users<T extends usersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, usersDefaultArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the user_earnings model
+   */
+  interface user_earningsFieldRefs {
+    readonly id: FieldRef<"user_earnings", 'String'>
+    readonly user_id: FieldRef<"user_earnings", 'String'>
+    readonly epoch_snapshot_id: FieldRef<"user_earnings", 'String'>
+    readonly earned_value: FieldRef<"user_earnings", 'Decimal'>
+    readonly calculated_at: FieldRef<"user_earnings", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * user_earnings findUnique
+   */
+  export type user_earningsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_earnings
+     */
+    select?: user_earningsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_earnings
+     */
+    omit?: user_earningsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_earningsInclude<ExtArgs> | null
+    /**
+     * Filter, which user_earnings to fetch.
+     */
+    where: user_earningsWhereUniqueInput
+  }
+
+  /**
+   * user_earnings findUniqueOrThrow
+   */
+  export type user_earningsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_earnings
+     */
+    select?: user_earningsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_earnings
+     */
+    omit?: user_earningsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_earningsInclude<ExtArgs> | null
+    /**
+     * Filter, which user_earnings to fetch.
+     */
+    where: user_earningsWhereUniqueInput
+  }
+
+  /**
+   * user_earnings findFirst
+   */
+  export type user_earningsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_earnings
+     */
+    select?: user_earningsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_earnings
+     */
+    omit?: user_earningsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_earningsInclude<ExtArgs> | null
+    /**
+     * Filter, which user_earnings to fetch.
+     */
+    where?: user_earningsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of user_earnings to fetch.
+     */
+    orderBy?: user_earningsOrderByWithRelationInput | user_earningsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for user_earnings.
+     */
+    cursor?: user_earningsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` user_earnings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` user_earnings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of user_earnings.
+     */
+    distinct?: User_earningsScalarFieldEnum | User_earningsScalarFieldEnum[]
+  }
+
+  /**
+   * user_earnings findFirstOrThrow
+   */
+  export type user_earningsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_earnings
+     */
+    select?: user_earningsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_earnings
+     */
+    omit?: user_earningsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_earningsInclude<ExtArgs> | null
+    /**
+     * Filter, which user_earnings to fetch.
+     */
+    where?: user_earningsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of user_earnings to fetch.
+     */
+    orderBy?: user_earningsOrderByWithRelationInput | user_earningsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for user_earnings.
+     */
+    cursor?: user_earningsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` user_earnings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` user_earnings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of user_earnings.
+     */
+    distinct?: User_earningsScalarFieldEnum | User_earningsScalarFieldEnum[]
+  }
+
+  /**
+   * user_earnings findMany
+   */
+  export type user_earningsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_earnings
+     */
+    select?: user_earningsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_earnings
+     */
+    omit?: user_earningsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_earningsInclude<ExtArgs> | null
+    /**
+     * Filter, which user_earnings to fetch.
+     */
+    where?: user_earningsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of user_earnings to fetch.
+     */
+    orderBy?: user_earningsOrderByWithRelationInput | user_earningsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing user_earnings.
+     */
+    cursor?: user_earningsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` user_earnings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` user_earnings.
+     */
+    skip?: number
+    distinct?: User_earningsScalarFieldEnum | User_earningsScalarFieldEnum[]
+  }
+
+  /**
+   * user_earnings create
+   */
+  export type user_earningsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_earnings
+     */
+    select?: user_earningsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_earnings
+     */
+    omit?: user_earningsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_earningsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a user_earnings.
+     */
+    data: XOR<user_earningsCreateInput, user_earningsUncheckedCreateInput>
+  }
+
+  /**
+   * user_earnings createMany
+   */
+  export type user_earningsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many user_earnings.
+     */
+    data: user_earningsCreateManyInput | user_earningsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * user_earnings createManyAndReturn
+   */
+  export type user_earningsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_earnings
+     */
+    select?: user_earningsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_earnings
+     */
+    omit?: user_earningsOmit<ExtArgs> | null
+    /**
+     * The data used to create many user_earnings.
+     */
+    data: user_earningsCreateManyInput | user_earningsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_earningsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * user_earnings update
+   */
+  export type user_earningsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_earnings
+     */
+    select?: user_earningsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_earnings
+     */
+    omit?: user_earningsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_earningsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a user_earnings.
+     */
+    data: XOR<user_earningsUpdateInput, user_earningsUncheckedUpdateInput>
+    /**
+     * Choose, which user_earnings to update.
+     */
+    where: user_earningsWhereUniqueInput
+  }
+
+  /**
+   * user_earnings updateMany
+   */
+  export type user_earningsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update user_earnings.
+     */
+    data: XOR<user_earningsUpdateManyMutationInput, user_earningsUncheckedUpdateManyInput>
+    /**
+     * Filter which user_earnings to update
+     */
+    where?: user_earningsWhereInput
+    /**
+     * Limit how many user_earnings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * user_earnings updateManyAndReturn
+   */
+  export type user_earningsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_earnings
+     */
+    select?: user_earningsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_earnings
+     */
+    omit?: user_earningsOmit<ExtArgs> | null
+    /**
+     * The data used to update user_earnings.
+     */
+    data: XOR<user_earningsUpdateManyMutationInput, user_earningsUncheckedUpdateManyInput>
+    /**
+     * Filter which user_earnings to update
+     */
+    where?: user_earningsWhereInput
+    /**
+     * Limit how many user_earnings to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_earningsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * user_earnings upsert
+   */
+  export type user_earningsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_earnings
+     */
+    select?: user_earningsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_earnings
+     */
+    omit?: user_earningsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_earningsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the user_earnings to update in case it exists.
+     */
+    where: user_earningsWhereUniqueInput
+    /**
+     * In case the user_earnings found by the `where` argument doesn't exist, create a new user_earnings with this data.
+     */
+    create: XOR<user_earningsCreateInput, user_earningsUncheckedCreateInput>
+    /**
+     * In case the user_earnings was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<user_earningsUpdateInput, user_earningsUncheckedUpdateInput>
+  }
+
+  /**
+   * user_earnings delete
+   */
+  export type user_earningsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_earnings
+     */
+    select?: user_earningsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_earnings
+     */
+    omit?: user_earningsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_earningsInclude<ExtArgs> | null
+    /**
+     * Filter which user_earnings to delete.
+     */
+    where: user_earningsWhereUniqueInput
+  }
+
+  /**
+   * user_earnings deleteMany
+   */
+  export type user_earningsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which user_earnings to delete
+     */
+    where?: user_earningsWhereInput
+    /**
+     * Limit how many user_earnings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * user_earnings without action
+   */
+  export type user_earningsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_earnings
+     */
+    select?: user_earningsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_earnings
+     */
+    omit?: user_earningsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_earningsInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -14856,7 +16121,7 @@ export namespace Prisma {
   export const DepositsScalarFieldEnum: {
     id: 'id',
     user_id: 'user_id',
-    amount_sol: 'amount_sol',
+    amount: 'amount',
     type: 'type',
     source_chain: 'source_chain',
     tx_hash: 'tx_hash',
@@ -14958,7 +16223,7 @@ export namespace Prisma {
   export const WithdrawalsScalarFieldEnum: {
     id: 'id',
     user_id: 'user_id',
-    amount_sol: 'amount_sol',
+    amount: 'amount',
     type: 'type',
     destination_chain: 'destination_chain',
     tx_hash: 'tx_hash',
@@ -14966,6 +16231,17 @@ export namespace Prisma {
   };
 
   export type WithdrawalsScalarFieldEnum = (typeof WithdrawalsScalarFieldEnum)[keyof typeof WithdrawalsScalarFieldEnum]
+
+
+  export const User_earningsScalarFieldEnum: {
+    id: 'id',
+    user_id: 'user_id',
+    epoch_snapshot_id: 'epoch_snapshot_id',
+    earned_value: 'earned_value',
+    calculated_at: 'calculated_at'
+  };
+
+  export type User_earningsScalarFieldEnum = (typeof User_earningsScalarFieldEnum)[keyof typeof User_earningsScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -15239,7 +16515,7 @@ export namespace Prisma {
     NOT?: depositsWhereInput | depositsWhereInput[]
     id?: UuidFilter<"deposits"> | string
     user_id?: UuidFilter<"deposits"> | string
-    amount_sol?: DecimalFilter<"deposits"> | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFilter<"deposits"> | Decimal | DecimalJsLike | number | string
     type?: StringFilter<"deposits"> | string
     source_chain?: StringFilter<"deposits"> | string
     tx_hash?: StringFilter<"deposits"> | string
@@ -15250,7 +16526,7 @@ export namespace Prisma {
   export type depositsOrderByWithRelationInput = {
     id?: SortOrder
     user_id?: SortOrder
-    amount_sol?: SortOrder
+    amount?: SortOrder
     type?: SortOrder
     source_chain?: SortOrder
     tx_hash?: SortOrder
@@ -15264,7 +16540,7 @@ export namespace Prisma {
     OR?: depositsWhereInput[]
     NOT?: depositsWhereInput | depositsWhereInput[]
     user_id?: UuidFilter<"deposits"> | string
-    amount_sol?: DecimalFilter<"deposits"> | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFilter<"deposits"> | Decimal | DecimalJsLike | number | string
     type?: StringFilter<"deposits"> | string
     source_chain?: StringFilter<"deposits"> | string
     tx_hash?: StringFilter<"deposits"> | string
@@ -15275,7 +16551,7 @@ export namespace Prisma {
   export type depositsOrderByWithAggregationInput = {
     id?: SortOrder
     user_id?: SortOrder
-    amount_sol?: SortOrder
+    amount?: SortOrder
     type?: SortOrder
     source_chain?: SortOrder
     tx_hash?: SortOrder
@@ -15293,7 +16569,7 @@ export namespace Prisma {
     NOT?: depositsScalarWhereWithAggregatesInput | depositsScalarWhereWithAggregatesInput[]
     id?: UuidWithAggregatesFilter<"deposits"> | string
     user_id?: UuidWithAggregatesFilter<"deposits"> | string
-    amount_sol?: DecimalWithAggregatesFilter<"deposits"> | Decimal | DecimalJsLike | number | string
+    amount?: DecimalWithAggregatesFilter<"deposits"> | Decimal | DecimalJsLike | number | string
     type?: StringWithAggregatesFilter<"deposits"> | string
     source_chain?: StringWithAggregatesFilter<"deposits"> | string
     tx_hash?: StringWithAggregatesFilter<"deposits"> | string
@@ -15308,6 +16584,7 @@ export namespace Prisma {
     epoch?: IntFilter<"epoch_snapshots"> | number
     snapshot_time?: DateTimeFilter<"epoch_snapshots"> | Date | string
     lst_strategy?: XOR<Lst_strategyNullableScalarRelationFilter, lst_strategyWhereInput> | null
+    user_earnings?: User_earningsListRelationFilter
     user_snapshots?: User_snapshotsListRelationFilter
   }
 
@@ -15316,6 +16593,7 @@ export namespace Prisma {
     epoch?: SortOrder
     snapshot_time?: SortOrder
     lst_strategy?: lst_strategyOrderByWithRelationInput
+    user_earnings?: user_earningsOrderByRelationAggregateInput
     user_snapshots?: user_snapshotsOrderByRelationAggregateInput
   }
 
@@ -15327,6 +16605,7 @@ export namespace Prisma {
     NOT?: epoch_snapshotsWhereInput | epoch_snapshotsWhereInput[]
     snapshot_time?: DateTimeFilter<"epoch_snapshots"> | Date | string
     lst_strategy?: XOR<Lst_strategyNullableScalarRelationFilter, lst_strategyWhereInput> | null
+    user_earnings?: User_earningsListRelationFilter
     user_snapshots?: User_snapshotsListRelationFilter
   }, "id" | "epoch">
 
@@ -15716,6 +16995,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"users"> | Date | string
     privy_id?: StringNullableFilter<"users"> | string | null
     deposits?: DepositsListRelationFilter
+    user_earnings?: User_earningsListRelationFilter
     user_snapshots?: User_snapshotsListRelationFilter
     withdrawals?: WithdrawalsListRelationFilter
   }
@@ -15725,6 +17005,7 @@ export namespace Prisma {
     created_at?: SortOrder
     privy_id?: SortOrderInput | SortOrder
     deposits?: depositsOrderByRelationAggregateInput
+    user_earnings?: user_earningsOrderByRelationAggregateInput
     user_snapshots?: user_snapshotsOrderByRelationAggregateInput
     withdrawals?: withdrawalsOrderByRelationAggregateInput
   }
@@ -15737,6 +17018,7 @@ export namespace Prisma {
     NOT?: usersWhereInput | usersWhereInput[]
     created_at?: DateTimeFilter<"users"> | Date | string
     deposits?: DepositsListRelationFilter
+    user_earnings?: User_earningsListRelationFilter
     user_snapshots?: User_snapshotsListRelationFilter
     withdrawals?: WithdrawalsListRelationFilter
   }, "id" | "privy_id">
@@ -15765,7 +17047,7 @@ export namespace Prisma {
     NOT?: withdrawalsWhereInput | withdrawalsWhereInput[]
     id?: UuidFilter<"withdrawals"> | string
     user_id?: UuidFilter<"withdrawals"> | string
-    amount_sol?: DecimalFilter<"withdrawals"> | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFilter<"withdrawals"> | Decimal | DecimalJsLike | number | string
     type?: StringFilter<"withdrawals"> | string
     destination_chain?: StringFilter<"withdrawals"> | string
     tx_hash?: StringNullableFilter<"withdrawals"> | string | null
@@ -15776,7 +17058,7 @@ export namespace Prisma {
   export type withdrawalsOrderByWithRelationInput = {
     id?: SortOrder
     user_id?: SortOrder
-    amount_sol?: SortOrder
+    amount?: SortOrder
     type?: SortOrder
     destination_chain?: SortOrder
     tx_hash?: SortOrderInput | SortOrder
@@ -15790,7 +17072,7 @@ export namespace Prisma {
     OR?: withdrawalsWhereInput[]
     NOT?: withdrawalsWhereInput | withdrawalsWhereInput[]
     user_id?: UuidFilter<"withdrawals"> | string
-    amount_sol?: DecimalFilter<"withdrawals"> | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFilter<"withdrawals"> | Decimal | DecimalJsLike | number | string
     type?: StringFilter<"withdrawals"> | string
     destination_chain?: StringFilter<"withdrawals"> | string
     tx_hash?: StringNullableFilter<"withdrawals"> | string | null
@@ -15801,7 +17083,7 @@ export namespace Prisma {
   export type withdrawalsOrderByWithAggregationInput = {
     id?: SortOrder
     user_id?: SortOrder
-    amount_sol?: SortOrder
+    amount?: SortOrder
     type?: SortOrder
     destination_chain?: SortOrder
     tx_hash?: SortOrderInput | SortOrder
@@ -15819,11 +17101,72 @@ export namespace Prisma {
     NOT?: withdrawalsScalarWhereWithAggregatesInput | withdrawalsScalarWhereWithAggregatesInput[]
     id?: UuidWithAggregatesFilter<"withdrawals"> | string
     user_id?: UuidWithAggregatesFilter<"withdrawals"> | string
-    amount_sol?: DecimalWithAggregatesFilter<"withdrawals"> | Decimal | DecimalJsLike | number | string
+    amount?: DecimalWithAggregatesFilter<"withdrawals"> | Decimal | DecimalJsLike | number | string
     type?: StringWithAggregatesFilter<"withdrawals"> | string
     destination_chain?: StringWithAggregatesFilter<"withdrawals"> | string
     tx_hash?: StringNullableWithAggregatesFilter<"withdrawals"> | string | null
     withdrawn_at?: DateTimeWithAggregatesFilter<"withdrawals"> | Date | string
+  }
+
+  export type user_earningsWhereInput = {
+    AND?: user_earningsWhereInput | user_earningsWhereInput[]
+    OR?: user_earningsWhereInput[]
+    NOT?: user_earningsWhereInput | user_earningsWhereInput[]
+    id?: UuidFilter<"user_earnings"> | string
+    user_id?: UuidFilter<"user_earnings"> | string
+    epoch_snapshot_id?: UuidFilter<"user_earnings"> | string
+    earned_value?: DecimalFilter<"user_earnings"> | Decimal | DecimalJsLike | number | string
+    calculated_at?: DateTimeFilter<"user_earnings"> | Date | string
+    epoch_snapshots?: XOR<Epoch_snapshotsScalarRelationFilter, epoch_snapshotsWhereInput>
+    users?: XOR<UsersScalarRelationFilter, usersWhereInput>
+  }
+
+  export type user_earningsOrderByWithRelationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    epoch_snapshot_id?: SortOrder
+    earned_value?: SortOrder
+    calculated_at?: SortOrder
+    epoch_snapshots?: epoch_snapshotsOrderByWithRelationInput
+    users?: usersOrderByWithRelationInput
+  }
+
+  export type user_earningsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    user_id_epoch_snapshot_id?: user_earningsUser_idEpoch_snapshot_idCompoundUniqueInput
+    AND?: user_earningsWhereInput | user_earningsWhereInput[]
+    OR?: user_earningsWhereInput[]
+    NOT?: user_earningsWhereInput | user_earningsWhereInput[]
+    user_id?: UuidFilter<"user_earnings"> | string
+    epoch_snapshot_id?: UuidFilter<"user_earnings"> | string
+    earned_value?: DecimalFilter<"user_earnings"> | Decimal | DecimalJsLike | number | string
+    calculated_at?: DateTimeFilter<"user_earnings"> | Date | string
+    epoch_snapshots?: XOR<Epoch_snapshotsScalarRelationFilter, epoch_snapshotsWhereInput>
+    users?: XOR<UsersScalarRelationFilter, usersWhereInput>
+  }, "id" | "user_id_epoch_snapshot_id">
+
+  export type user_earningsOrderByWithAggregationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    epoch_snapshot_id?: SortOrder
+    earned_value?: SortOrder
+    calculated_at?: SortOrder
+    _count?: user_earningsCountOrderByAggregateInput
+    _avg?: user_earningsAvgOrderByAggregateInput
+    _max?: user_earningsMaxOrderByAggregateInput
+    _min?: user_earningsMinOrderByAggregateInput
+    _sum?: user_earningsSumOrderByAggregateInput
+  }
+
+  export type user_earningsScalarWhereWithAggregatesInput = {
+    AND?: user_earningsScalarWhereWithAggregatesInput | user_earningsScalarWhereWithAggregatesInput[]
+    OR?: user_earningsScalarWhereWithAggregatesInput[]
+    NOT?: user_earningsScalarWhereWithAggregatesInput | user_earningsScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"user_earnings"> | string
+    user_id?: UuidWithAggregatesFilter<"user_earnings"> | string
+    epoch_snapshot_id?: UuidWithAggregatesFilter<"user_earnings"> | string
+    earned_value?: DecimalWithAggregatesFilter<"user_earnings"> | Decimal | DecimalJsLike | number | string
+    calculated_at?: DateTimeWithAggregatesFilter<"user_earnings"> | Date | string
   }
 
   export type sqlx_migrationsCreateInput = {
@@ -15968,7 +17311,7 @@ export namespace Prisma {
 
   export type depositsCreateInput = {
     id?: string
-    amount_sol: Decimal | DecimalJsLike | number | string
+    amount: Decimal | DecimalJsLike | number | string
     type: string
     source_chain: string
     tx_hash: string
@@ -15979,7 +17322,7 @@ export namespace Prisma {
   export type depositsUncheckedCreateInput = {
     id?: string
     user_id: string
-    amount_sol: Decimal | DecimalJsLike | number | string
+    amount: Decimal | DecimalJsLike | number | string
     type: string
     source_chain: string
     tx_hash: string
@@ -15988,7 +17331,7 @@ export namespace Prisma {
 
   export type depositsUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount_sol?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: StringFieldUpdateOperationsInput | string
     source_chain?: StringFieldUpdateOperationsInput | string
     tx_hash?: StringFieldUpdateOperationsInput | string
@@ -15999,7 +17342,7 @@ export namespace Prisma {
   export type depositsUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
-    amount_sol?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: StringFieldUpdateOperationsInput | string
     source_chain?: StringFieldUpdateOperationsInput | string
     tx_hash?: StringFieldUpdateOperationsInput | string
@@ -16009,7 +17352,7 @@ export namespace Prisma {
   export type depositsCreateManyInput = {
     id?: string
     user_id: string
-    amount_sol: Decimal | DecimalJsLike | number | string
+    amount: Decimal | DecimalJsLike | number | string
     type: string
     source_chain: string
     tx_hash: string
@@ -16018,7 +17361,7 @@ export namespace Prisma {
 
   export type depositsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount_sol?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: StringFieldUpdateOperationsInput | string
     source_chain?: StringFieldUpdateOperationsInput | string
     tx_hash?: StringFieldUpdateOperationsInput | string
@@ -16028,7 +17371,7 @@ export namespace Prisma {
   export type depositsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
-    amount_sol?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: StringFieldUpdateOperationsInput | string
     source_chain?: StringFieldUpdateOperationsInput | string
     tx_hash?: StringFieldUpdateOperationsInput | string
@@ -16040,6 +17383,7 @@ export namespace Prisma {
     epoch: number
     snapshot_time?: Date | string
     lst_strategy?: lst_strategyCreateNestedOneWithoutEpoch_snapshotsInput
+    user_earnings?: user_earningsCreateNestedManyWithoutEpoch_snapshotsInput
     user_snapshots?: user_snapshotsCreateNestedManyWithoutEpoch_snapshotsInput
   }
 
@@ -16048,6 +17392,7 @@ export namespace Prisma {
     epoch: number
     snapshot_time?: Date | string
     lst_strategy?: lst_strategyUncheckedCreateNestedOneWithoutEpoch_snapshotsInput
+    user_earnings?: user_earningsUncheckedCreateNestedManyWithoutEpoch_snapshotsInput
     user_snapshots?: user_snapshotsUncheckedCreateNestedManyWithoutEpoch_snapshotsInput
   }
 
@@ -16056,6 +17401,7 @@ export namespace Prisma {
     epoch?: IntFieldUpdateOperationsInput | number
     snapshot_time?: DateTimeFieldUpdateOperationsInput | Date | string
     lst_strategy?: lst_strategyUpdateOneWithoutEpoch_snapshotsNestedInput
+    user_earnings?: user_earningsUpdateManyWithoutEpoch_snapshotsNestedInput
     user_snapshots?: user_snapshotsUpdateManyWithoutEpoch_snapshotsNestedInput
   }
 
@@ -16064,6 +17410,7 @@ export namespace Prisma {
     epoch?: IntFieldUpdateOperationsInput | number
     snapshot_time?: DateTimeFieldUpdateOperationsInput | Date | string
     lst_strategy?: lst_strategyUncheckedUpdateOneWithoutEpoch_snapshotsNestedInput
+    user_earnings?: user_earningsUncheckedUpdateManyWithoutEpoch_snapshotsNestedInput
     user_snapshots?: user_snapshotsUncheckedUpdateManyWithoutEpoch_snapshotsNestedInput
   }
 
@@ -16458,6 +17805,7 @@ export namespace Prisma {
     created_at?: Date | string
     privy_id?: string | null
     deposits?: depositsCreateNestedManyWithoutUsersInput
+    user_earnings?: user_earningsCreateNestedManyWithoutUsersInput
     user_snapshots?: user_snapshotsCreateNestedManyWithoutUsersInput
     withdrawals?: withdrawalsCreateNestedManyWithoutUsersInput
   }
@@ -16467,6 +17815,7 @@ export namespace Prisma {
     created_at?: Date | string
     privy_id?: string | null
     deposits?: depositsUncheckedCreateNestedManyWithoutUsersInput
+    user_earnings?: user_earningsUncheckedCreateNestedManyWithoutUsersInput
     user_snapshots?: user_snapshotsUncheckedCreateNestedManyWithoutUsersInput
     withdrawals?: withdrawalsUncheckedCreateNestedManyWithoutUsersInput
   }
@@ -16476,6 +17825,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     privy_id?: NullableStringFieldUpdateOperationsInput | string | null
     deposits?: depositsUpdateManyWithoutUsersNestedInput
+    user_earnings?: user_earningsUpdateManyWithoutUsersNestedInput
     user_snapshots?: user_snapshotsUpdateManyWithoutUsersNestedInput
     withdrawals?: withdrawalsUpdateManyWithoutUsersNestedInput
   }
@@ -16485,6 +17835,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     privy_id?: NullableStringFieldUpdateOperationsInput | string | null
     deposits?: depositsUncheckedUpdateManyWithoutUsersNestedInput
+    user_earnings?: user_earningsUncheckedUpdateManyWithoutUsersNestedInput
     user_snapshots?: user_snapshotsUncheckedUpdateManyWithoutUsersNestedInput
     withdrawals?: withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
   }
@@ -16509,7 +17860,7 @@ export namespace Prisma {
 
   export type withdrawalsCreateInput = {
     id?: string
-    amount_sol: Decimal | DecimalJsLike | number | string
+    amount: Decimal | DecimalJsLike | number | string
     type: string
     destination_chain: string
     tx_hash?: string | null
@@ -16520,7 +17871,7 @@ export namespace Prisma {
   export type withdrawalsUncheckedCreateInput = {
     id?: string
     user_id: string
-    amount_sol: Decimal | DecimalJsLike | number | string
+    amount: Decimal | DecimalJsLike | number | string
     type: string
     destination_chain: string
     tx_hash?: string | null
@@ -16529,7 +17880,7 @@ export namespace Prisma {
 
   export type withdrawalsUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount_sol?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: StringFieldUpdateOperationsInput | string
     destination_chain?: StringFieldUpdateOperationsInput | string
     tx_hash?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16540,7 +17891,7 @@ export namespace Prisma {
   export type withdrawalsUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
-    amount_sol?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: StringFieldUpdateOperationsInput | string
     destination_chain?: StringFieldUpdateOperationsInput | string
     tx_hash?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16550,7 +17901,7 @@ export namespace Prisma {
   export type withdrawalsCreateManyInput = {
     id?: string
     user_id: string
-    amount_sol: Decimal | DecimalJsLike | number | string
+    amount: Decimal | DecimalJsLike | number | string
     type: string
     destination_chain: string
     tx_hash?: string | null
@@ -16559,7 +17910,7 @@ export namespace Prisma {
 
   export type withdrawalsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount_sol?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: StringFieldUpdateOperationsInput | string
     destination_chain?: StringFieldUpdateOperationsInput | string
     tx_hash?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16569,11 +17920,65 @@ export namespace Prisma {
   export type withdrawalsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
-    amount_sol?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: StringFieldUpdateOperationsInput | string
     destination_chain?: StringFieldUpdateOperationsInput | string
     tx_hash?: NullableStringFieldUpdateOperationsInput | string | null
     withdrawn_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type user_earningsCreateInput = {
+    id?: string
+    earned_value: Decimal | DecimalJsLike | number | string
+    calculated_at?: Date | string
+    epoch_snapshots: epoch_snapshotsCreateNestedOneWithoutUser_earningsInput
+    users: usersCreateNestedOneWithoutUser_earningsInput
+  }
+
+  export type user_earningsUncheckedCreateInput = {
+    id?: string
+    user_id: string
+    epoch_snapshot_id: string
+    earned_value: Decimal | DecimalJsLike | number | string
+    calculated_at?: Date | string
+  }
+
+  export type user_earningsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    earned_value?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    calculated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    epoch_snapshots?: epoch_snapshotsUpdateOneRequiredWithoutUser_earningsNestedInput
+    users?: usersUpdateOneRequiredWithoutUser_earningsNestedInput
+  }
+
+  export type user_earningsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    epoch_snapshot_id?: StringFieldUpdateOperationsInput | string
+    earned_value?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    calculated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type user_earningsCreateManyInput = {
+    id?: string
+    user_id: string
+    epoch_snapshot_id: string
+    earned_value: Decimal | DecimalJsLike | number | string
+    calculated_at?: Date | string
+  }
+
+  export type user_earningsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    earned_value?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    calculated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type user_earningsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    epoch_snapshot_id?: StringFieldUpdateOperationsInput | string
+    earned_value?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    calculated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BigIntFilter<$PrismaModel = never> = {
@@ -16882,7 +18287,7 @@ export namespace Prisma {
   export type depositsCountOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
-    amount_sol?: SortOrder
+    amount?: SortOrder
     type?: SortOrder
     source_chain?: SortOrder
     tx_hash?: SortOrder
@@ -16890,13 +18295,13 @@ export namespace Prisma {
   }
 
   export type depositsAvgOrderByAggregateInput = {
-    amount_sol?: SortOrder
+    amount?: SortOrder
   }
 
   export type depositsMaxOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
-    amount_sol?: SortOrder
+    amount?: SortOrder
     type?: SortOrder
     source_chain?: SortOrder
     tx_hash?: SortOrder
@@ -16906,7 +18311,7 @@ export namespace Prisma {
   export type depositsMinOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
-    amount_sol?: SortOrder
+    amount?: SortOrder
     type?: SortOrder
     source_chain?: SortOrder
     tx_hash?: SortOrder
@@ -16914,7 +18319,7 @@ export namespace Prisma {
   }
 
   export type depositsSumOrderByAggregateInput = {
-    amount_sol?: SortOrder
+    amount?: SortOrder
   }
 
   export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
@@ -16949,10 +18354,20 @@ export namespace Prisma {
     isNot?: lst_strategyWhereInput | null
   }
 
+  export type User_earningsListRelationFilter = {
+    every?: user_earningsWhereInput
+    some?: user_earningsWhereInput
+    none?: user_earningsWhereInput
+  }
+
   export type User_snapshotsListRelationFilter = {
     every?: user_snapshotsWhereInput
     some?: user_snapshotsWhereInput
     none?: user_snapshotsWhereInput
+  }
+
+  export type user_earningsOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type user_snapshotsOrderByRelationAggregateInput = {
@@ -17260,7 +18675,7 @@ export namespace Prisma {
   export type withdrawalsCountOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
-    amount_sol?: SortOrder
+    amount?: SortOrder
     type?: SortOrder
     destination_chain?: SortOrder
     tx_hash?: SortOrder
@@ -17268,13 +18683,13 @@ export namespace Prisma {
   }
 
   export type withdrawalsAvgOrderByAggregateInput = {
-    amount_sol?: SortOrder
+    amount?: SortOrder
   }
 
   export type withdrawalsMaxOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
-    amount_sol?: SortOrder
+    amount?: SortOrder
     type?: SortOrder
     destination_chain?: SortOrder
     tx_hash?: SortOrder
@@ -17284,7 +18699,7 @@ export namespace Prisma {
   export type withdrawalsMinOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
-    amount_sol?: SortOrder
+    amount?: SortOrder
     type?: SortOrder
     destination_chain?: SortOrder
     tx_hash?: SortOrder
@@ -17292,7 +18707,44 @@ export namespace Prisma {
   }
 
   export type withdrawalsSumOrderByAggregateInput = {
-    amount_sol?: SortOrder
+    amount?: SortOrder
+  }
+
+  export type user_earningsUser_idEpoch_snapshot_idCompoundUniqueInput = {
+    user_id: string
+    epoch_snapshot_id: string
+  }
+
+  export type user_earningsCountOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    epoch_snapshot_id?: SortOrder
+    earned_value?: SortOrder
+    calculated_at?: SortOrder
+  }
+
+  export type user_earningsAvgOrderByAggregateInput = {
+    earned_value?: SortOrder
+  }
+
+  export type user_earningsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    epoch_snapshot_id?: SortOrder
+    earned_value?: SortOrder
+    calculated_at?: SortOrder
+  }
+
+  export type user_earningsMinOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    epoch_snapshot_id?: SortOrder
+    earned_value?: SortOrder
+    calculated_at?: SortOrder
+  }
+
+  export type user_earningsSumOrderByAggregateInput = {
+    earned_value?: SortOrder
   }
 
   export type BigIntFieldUpdateOperationsInput = {
@@ -17359,6 +18811,13 @@ export namespace Prisma {
     connect?: lst_strategyWhereUniqueInput
   }
 
+  export type user_earningsCreateNestedManyWithoutEpoch_snapshotsInput = {
+    create?: XOR<user_earningsCreateWithoutEpoch_snapshotsInput, user_earningsUncheckedCreateWithoutEpoch_snapshotsInput> | user_earningsCreateWithoutEpoch_snapshotsInput[] | user_earningsUncheckedCreateWithoutEpoch_snapshotsInput[]
+    connectOrCreate?: user_earningsCreateOrConnectWithoutEpoch_snapshotsInput | user_earningsCreateOrConnectWithoutEpoch_snapshotsInput[]
+    createMany?: user_earningsCreateManyEpoch_snapshotsInputEnvelope
+    connect?: user_earningsWhereUniqueInput | user_earningsWhereUniqueInput[]
+  }
+
   export type user_snapshotsCreateNestedManyWithoutEpoch_snapshotsInput = {
     create?: XOR<user_snapshotsCreateWithoutEpoch_snapshotsInput, user_snapshotsUncheckedCreateWithoutEpoch_snapshotsInput> | user_snapshotsCreateWithoutEpoch_snapshotsInput[] | user_snapshotsUncheckedCreateWithoutEpoch_snapshotsInput[]
     connectOrCreate?: user_snapshotsCreateOrConnectWithoutEpoch_snapshotsInput | user_snapshotsCreateOrConnectWithoutEpoch_snapshotsInput[]
@@ -17370,6 +18829,13 @@ export namespace Prisma {
     create?: XOR<lst_strategyCreateWithoutEpoch_snapshotsInput, lst_strategyUncheckedCreateWithoutEpoch_snapshotsInput>
     connectOrCreate?: lst_strategyCreateOrConnectWithoutEpoch_snapshotsInput
     connect?: lst_strategyWhereUniqueInput
+  }
+
+  export type user_earningsUncheckedCreateNestedManyWithoutEpoch_snapshotsInput = {
+    create?: XOR<user_earningsCreateWithoutEpoch_snapshotsInput, user_earningsUncheckedCreateWithoutEpoch_snapshotsInput> | user_earningsCreateWithoutEpoch_snapshotsInput[] | user_earningsUncheckedCreateWithoutEpoch_snapshotsInput[]
+    connectOrCreate?: user_earningsCreateOrConnectWithoutEpoch_snapshotsInput | user_earningsCreateOrConnectWithoutEpoch_snapshotsInput[]
+    createMany?: user_earningsCreateManyEpoch_snapshotsInputEnvelope
+    connect?: user_earningsWhereUniqueInput | user_earningsWhereUniqueInput[]
   }
 
   export type user_snapshotsUncheckedCreateNestedManyWithoutEpoch_snapshotsInput = {
@@ -17397,6 +18863,20 @@ export namespace Prisma {
     update?: XOR<XOR<lst_strategyUpdateToOneWithWhereWithoutEpoch_snapshotsInput, lst_strategyUpdateWithoutEpoch_snapshotsInput>, lst_strategyUncheckedUpdateWithoutEpoch_snapshotsInput>
   }
 
+  export type user_earningsUpdateManyWithoutEpoch_snapshotsNestedInput = {
+    create?: XOR<user_earningsCreateWithoutEpoch_snapshotsInput, user_earningsUncheckedCreateWithoutEpoch_snapshotsInput> | user_earningsCreateWithoutEpoch_snapshotsInput[] | user_earningsUncheckedCreateWithoutEpoch_snapshotsInput[]
+    connectOrCreate?: user_earningsCreateOrConnectWithoutEpoch_snapshotsInput | user_earningsCreateOrConnectWithoutEpoch_snapshotsInput[]
+    upsert?: user_earningsUpsertWithWhereUniqueWithoutEpoch_snapshotsInput | user_earningsUpsertWithWhereUniqueWithoutEpoch_snapshotsInput[]
+    createMany?: user_earningsCreateManyEpoch_snapshotsInputEnvelope
+    set?: user_earningsWhereUniqueInput | user_earningsWhereUniqueInput[]
+    disconnect?: user_earningsWhereUniqueInput | user_earningsWhereUniqueInput[]
+    delete?: user_earningsWhereUniqueInput | user_earningsWhereUniqueInput[]
+    connect?: user_earningsWhereUniqueInput | user_earningsWhereUniqueInput[]
+    update?: user_earningsUpdateWithWhereUniqueWithoutEpoch_snapshotsInput | user_earningsUpdateWithWhereUniqueWithoutEpoch_snapshotsInput[]
+    updateMany?: user_earningsUpdateManyWithWhereWithoutEpoch_snapshotsInput | user_earningsUpdateManyWithWhereWithoutEpoch_snapshotsInput[]
+    deleteMany?: user_earningsScalarWhereInput | user_earningsScalarWhereInput[]
+  }
+
   export type user_snapshotsUpdateManyWithoutEpoch_snapshotsNestedInput = {
     create?: XOR<user_snapshotsCreateWithoutEpoch_snapshotsInput, user_snapshotsUncheckedCreateWithoutEpoch_snapshotsInput> | user_snapshotsCreateWithoutEpoch_snapshotsInput[] | user_snapshotsUncheckedCreateWithoutEpoch_snapshotsInput[]
     connectOrCreate?: user_snapshotsCreateOrConnectWithoutEpoch_snapshotsInput | user_snapshotsCreateOrConnectWithoutEpoch_snapshotsInput[]
@@ -17419,6 +18899,20 @@ export namespace Prisma {
     delete?: lst_strategyWhereInput | boolean
     connect?: lst_strategyWhereUniqueInput
     update?: XOR<XOR<lst_strategyUpdateToOneWithWhereWithoutEpoch_snapshotsInput, lst_strategyUpdateWithoutEpoch_snapshotsInput>, lst_strategyUncheckedUpdateWithoutEpoch_snapshotsInput>
+  }
+
+  export type user_earningsUncheckedUpdateManyWithoutEpoch_snapshotsNestedInput = {
+    create?: XOR<user_earningsCreateWithoutEpoch_snapshotsInput, user_earningsUncheckedCreateWithoutEpoch_snapshotsInput> | user_earningsCreateWithoutEpoch_snapshotsInput[] | user_earningsUncheckedCreateWithoutEpoch_snapshotsInput[]
+    connectOrCreate?: user_earningsCreateOrConnectWithoutEpoch_snapshotsInput | user_earningsCreateOrConnectWithoutEpoch_snapshotsInput[]
+    upsert?: user_earningsUpsertWithWhereUniqueWithoutEpoch_snapshotsInput | user_earningsUpsertWithWhereUniqueWithoutEpoch_snapshotsInput[]
+    createMany?: user_earningsCreateManyEpoch_snapshotsInputEnvelope
+    set?: user_earningsWhereUniqueInput | user_earningsWhereUniqueInput[]
+    disconnect?: user_earningsWhereUniqueInput | user_earningsWhereUniqueInput[]
+    delete?: user_earningsWhereUniqueInput | user_earningsWhereUniqueInput[]
+    connect?: user_earningsWhereUniqueInput | user_earningsWhereUniqueInput[]
+    update?: user_earningsUpdateWithWhereUniqueWithoutEpoch_snapshotsInput | user_earningsUpdateWithWhereUniqueWithoutEpoch_snapshotsInput[]
+    updateMany?: user_earningsUpdateManyWithWhereWithoutEpoch_snapshotsInput | user_earningsUpdateManyWithWhereWithoutEpoch_snapshotsInput[]
+    deleteMany?: user_earningsScalarWhereInput | user_earningsScalarWhereInput[]
   }
 
   export type user_snapshotsUncheckedUpdateManyWithoutEpoch_snapshotsNestedInput = {
@@ -17484,6 +18978,13 @@ export namespace Prisma {
     connect?: depositsWhereUniqueInput | depositsWhereUniqueInput[]
   }
 
+  export type user_earningsCreateNestedManyWithoutUsersInput = {
+    create?: XOR<user_earningsCreateWithoutUsersInput, user_earningsUncheckedCreateWithoutUsersInput> | user_earningsCreateWithoutUsersInput[] | user_earningsUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: user_earningsCreateOrConnectWithoutUsersInput | user_earningsCreateOrConnectWithoutUsersInput[]
+    createMany?: user_earningsCreateManyUsersInputEnvelope
+    connect?: user_earningsWhereUniqueInput | user_earningsWhereUniqueInput[]
+  }
+
   export type user_snapshotsCreateNestedManyWithoutUsersInput = {
     create?: XOR<user_snapshotsCreateWithoutUsersInput, user_snapshotsUncheckedCreateWithoutUsersInput> | user_snapshotsCreateWithoutUsersInput[] | user_snapshotsUncheckedCreateWithoutUsersInput[]
     connectOrCreate?: user_snapshotsCreateOrConnectWithoutUsersInput | user_snapshotsCreateOrConnectWithoutUsersInput[]
@@ -17503,6 +19004,13 @@ export namespace Prisma {
     connectOrCreate?: depositsCreateOrConnectWithoutUsersInput | depositsCreateOrConnectWithoutUsersInput[]
     createMany?: depositsCreateManyUsersInputEnvelope
     connect?: depositsWhereUniqueInput | depositsWhereUniqueInput[]
+  }
+
+  export type user_earningsUncheckedCreateNestedManyWithoutUsersInput = {
+    create?: XOR<user_earningsCreateWithoutUsersInput, user_earningsUncheckedCreateWithoutUsersInput> | user_earningsCreateWithoutUsersInput[] | user_earningsUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: user_earningsCreateOrConnectWithoutUsersInput | user_earningsCreateOrConnectWithoutUsersInput[]
+    createMany?: user_earningsCreateManyUsersInputEnvelope
+    connect?: user_earningsWhereUniqueInput | user_earningsWhereUniqueInput[]
   }
 
   export type user_snapshotsUncheckedCreateNestedManyWithoutUsersInput = {
@@ -17531,6 +19039,20 @@ export namespace Prisma {
     update?: depositsUpdateWithWhereUniqueWithoutUsersInput | depositsUpdateWithWhereUniqueWithoutUsersInput[]
     updateMany?: depositsUpdateManyWithWhereWithoutUsersInput | depositsUpdateManyWithWhereWithoutUsersInput[]
     deleteMany?: depositsScalarWhereInput | depositsScalarWhereInput[]
+  }
+
+  export type user_earningsUpdateManyWithoutUsersNestedInput = {
+    create?: XOR<user_earningsCreateWithoutUsersInput, user_earningsUncheckedCreateWithoutUsersInput> | user_earningsCreateWithoutUsersInput[] | user_earningsUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: user_earningsCreateOrConnectWithoutUsersInput | user_earningsCreateOrConnectWithoutUsersInput[]
+    upsert?: user_earningsUpsertWithWhereUniqueWithoutUsersInput | user_earningsUpsertWithWhereUniqueWithoutUsersInput[]
+    createMany?: user_earningsCreateManyUsersInputEnvelope
+    set?: user_earningsWhereUniqueInput | user_earningsWhereUniqueInput[]
+    disconnect?: user_earningsWhereUniqueInput | user_earningsWhereUniqueInput[]
+    delete?: user_earningsWhereUniqueInput | user_earningsWhereUniqueInput[]
+    connect?: user_earningsWhereUniqueInput | user_earningsWhereUniqueInput[]
+    update?: user_earningsUpdateWithWhereUniqueWithoutUsersInput | user_earningsUpdateWithWhereUniqueWithoutUsersInput[]
+    updateMany?: user_earningsUpdateManyWithWhereWithoutUsersInput | user_earningsUpdateManyWithWhereWithoutUsersInput[]
+    deleteMany?: user_earningsScalarWhereInput | user_earningsScalarWhereInput[]
   }
 
   export type user_snapshotsUpdateManyWithoutUsersNestedInput = {
@@ -17575,6 +19097,20 @@ export namespace Prisma {
     deleteMany?: depositsScalarWhereInput | depositsScalarWhereInput[]
   }
 
+  export type user_earningsUncheckedUpdateManyWithoutUsersNestedInput = {
+    create?: XOR<user_earningsCreateWithoutUsersInput, user_earningsUncheckedCreateWithoutUsersInput> | user_earningsCreateWithoutUsersInput[] | user_earningsUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: user_earningsCreateOrConnectWithoutUsersInput | user_earningsCreateOrConnectWithoutUsersInput[]
+    upsert?: user_earningsUpsertWithWhereUniqueWithoutUsersInput | user_earningsUpsertWithWhereUniqueWithoutUsersInput[]
+    createMany?: user_earningsCreateManyUsersInputEnvelope
+    set?: user_earningsWhereUniqueInput | user_earningsWhereUniqueInput[]
+    disconnect?: user_earningsWhereUniqueInput | user_earningsWhereUniqueInput[]
+    delete?: user_earningsWhereUniqueInput | user_earningsWhereUniqueInput[]
+    connect?: user_earningsWhereUniqueInput | user_earningsWhereUniqueInput[]
+    update?: user_earningsUpdateWithWhereUniqueWithoutUsersInput | user_earningsUpdateWithWhereUniqueWithoutUsersInput[]
+    updateMany?: user_earningsUpdateManyWithWhereWithoutUsersInput | user_earningsUpdateManyWithWhereWithoutUsersInput[]
+    deleteMany?: user_earningsScalarWhereInput | user_earningsScalarWhereInput[]
+  }
+
   export type user_snapshotsUncheckedUpdateManyWithoutUsersNestedInput = {
     create?: XOR<user_snapshotsCreateWithoutUsersInput, user_snapshotsUncheckedCreateWithoutUsersInput> | user_snapshotsCreateWithoutUsersInput[] | user_snapshotsUncheckedCreateWithoutUsersInput[]
     connectOrCreate?: user_snapshotsCreateOrConnectWithoutUsersInput | user_snapshotsCreateOrConnectWithoutUsersInput[]
@@ -17615,6 +19151,34 @@ export namespace Prisma {
     upsert?: usersUpsertWithoutWithdrawalsInput
     connect?: usersWhereUniqueInput
     update?: XOR<XOR<usersUpdateToOneWithWhereWithoutWithdrawalsInput, usersUpdateWithoutWithdrawalsInput>, usersUncheckedUpdateWithoutWithdrawalsInput>
+  }
+
+  export type epoch_snapshotsCreateNestedOneWithoutUser_earningsInput = {
+    create?: XOR<epoch_snapshotsCreateWithoutUser_earningsInput, epoch_snapshotsUncheckedCreateWithoutUser_earningsInput>
+    connectOrCreate?: epoch_snapshotsCreateOrConnectWithoutUser_earningsInput
+    connect?: epoch_snapshotsWhereUniqueInput
+  }
+
+  export type usersCreateNestedOneWithoutUser_earningsInput = {
+    create?: XOR<usersCreateWithoutUser_earningsInput, usersUncheckedCreateWithoutUser_earningsInput>
+    connectOrCreate?: usersCreateOrConnectWithoutUser_earningsInput
+    connect?: usersWhereUniqueInput
+  }
+
+  export type epoch_snapshotsUpdateOneRequiredWithoutUser_earningsNestedInput = {
+    create?: XOR<epoch_snapshotsCreateWithoutUser_earningsInput, epoch_snapshotsUncheckedCreateWithoutUser_earningsInput>
+    connectOrCreate?: epoch_snapshotsCreateOrConnectWithoutUser_earningsInput
+    upsert?: epoch_snapshotsUpsertWithoutUser_earningsInput
+    connect?: epoch_snapshotsWhereUniqueInput
+    update?: XOR<XOR<epoch_snapshotsUpdateToOneWithWhereWithoutUser_earningsInput, epoch_snapshotsUpdateWithoutUser_earningsInput>, epoch_snapshotsUncheckedUpdateWithoutUser_earningsInput>
+  }
+
+  export type usersUpdateOneRequiredWithoutUser_earningsNestedInput = {
+    create?: XOR<usersCreateWithoutUser_earningsInput, usersUncheckedCreateWithoutUser_earningsInput>
+    connectOrCreate?: usersCreateOrConnectWithoutUser_earningsInput
+    upsert?: usersUpsertWithoutUser_earningsInput
+    connect?: usersWhereUniqueInput
+    update?: XOR<XOR<usersUpdateToOneWithWhereWithoutUser_earningsInput, usersUpdateWithoutUser_earningsInput>, usersUncheckedUpdateWithoutUser_earningsInput>
   }
 
   export type NestedBigIntFilter<$PrismaModel = never> = {
@@ -17893,6 +19457,7 @@ export namespace Prisma {
     id?: string
     created_at?: Date | string
     privy_id?: string | null
+    user_earnings?: user_earningsCreateNestedManyWithoutUsersInput
     user_snapshots?: user_snapshotsCreateNestedManyWithoutUsersInput
     withdrawals?: withdrawalsCreateNestedManyWithoutUsersInput
   }
@@ -17901,6 +19466,7 @@ export namespace Prisma {
     id?: string
     created_at?: Date | string
     privy_id?: string | null
+    user_earnings?: user_earningsUncheckedCreateNestedManyWithoutUsersInput
     user_snapshots?: user_snapshotsUncheckedCreateNestedManyWithoutUsersInput
     withdrawals?: withdrawalsUncheckedCreateNestedManyWithoutUsersInput
   }
@@ -17925,6 +19491,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     privy_id?: NullableStringFieldUpdateOperationsInput | string | null
+    user_earnings?: user_earningsUpdateManyWithoutUsersNestedInput
     user_snapshots?: user_snapshotsUpdateManyWithoutUsersNestedInput
     withdrawals?: withdrawalsUpdateManyWithoutUsersNestedInput
   }
@@ -17933,6 +19500,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     privy_id?: NullableStringFieldUpdateOperationsInput | string | null
+    user_earnings?: user_earningsUncheckedUpdateManyWithoutUsersNestedInput
     user_snapshots?: user_snapshotsUncheckedUpdateManyWithoutUsersNestedInput
     withdrawals?: withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
   }
@@ -17952,6 +19520,30 @@ export namespace Prisma {
   export type lst_strategyCreateOrConnectWithoutEpoch_snapshotsInput = {
     where: lst_strategyWhereUniqueInput
     create: XOR<lst_strategyCreateWithoutEpoch_snapshotsInput, lst_strategyUncheckedCreateWithoutEpoch_snapshotsInput>
+  }
+
+  export type user_earningsCreateWithoutEpoch_snapshotsInput = {
+    id?: string
+    earned_value: Decimal | DecimalJsLike | number | string
+    calculated_at?: Date | string
+    users: usersCreateNestedOneWithoutUser_earningsInput
+  }
+
+  export type user_earningsUncheckedCreateWithoutEpoch_snapshotsInput = {
+    id?: string
+    user_id: string
+    earned_value: Decimal | DecimalJsLike | number | string
+    calculated_at?: Date | string
+  }
+
+  export type user_earningsCreateOrConnectWithoutEpoch_snapshotsInput = {
+    where: user_earningsWhereUniqueInput
+    create: XOR<user_earningsCreateWithoutEpoch_snapshotsInput, user_earningsUncheckedCreateWithoutEpoch_snapshotsInput>
+  }
+
+  export type user_earningsCreateManyEpoch_snapshotsInputEnvelope = {
+    data: user_earningsCreateManyEpoch_snapshotsInput | user_earningsCreateManyEpoch_snapshotsInput[]
+    skipDuplicates?: boolean
   }
 
   export type user_snapshotsCreateWithoutEpoch_snapshotsInput = {
@@ -18001,6 +19593,33 @@ export namespace Prisma {
     decided_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type user_earningsUpsertWithWhereUniqueWithoutEpoch_snapshotsInput = {
+    where: user_earningsWhereUniqueInput
+    update: XOR<user_earningsUpdateWithoutEpoch_snapshotsInput, user_earningsUncheckedUpdateWithoutEpoch_snapshotsInput>
+    create: XOR<user_earningsCreateWithoutEpoch_snapshotsInput, user_earningsUncheckedCreateWithoutEpoch_snapshotsInput>
+  }
+
+  export type user_earningsUpdateWithWhereUniqueWithoutEpoch_snapshotsInput = {
+    where: user_earningsWhereUniqueInput
+    data: XOR<user_earningsUpdateWithoutEpoch_snapshotsInput, user_earningsUncheckedUpdateWithoutEpoch_snapshotsInput>
+  }
+
+  export type user_earningsUpdateManyWithWhereWithoutEpoch_snapshotsInput = {
+    where: user_earningsScalarWhereInput
+    data: XOR<user_earningsUpdateManyMutationInput, user_earningsUncheckedUpdateManyWithoutEpoch_snapshotsInput>
+  }
+
+  export type user_earningsScalarWhereInput = {
+    AND?: user_earningsScalarWhereInput | user_earningsScalarWhereInput[]
+    OR?: user_earningsScalarWhereInput[]
+    NOT?: user_earningsScalarWhereInput | user_earningsScalarWhereInput[]
+    id?: UuidFilter<"user_earnings"> | string
+    user_id?: UuidFilter<"user_earnings"> | string
+    epoch_snapshot_id?: UuidFilter<"user_earnings"> | string
+    earned_value?: DecimalFilter<"user_earnings"> | Decimal | DecimalJsLike | number | string
+    calculated_at?: DateTimeFilter<"user_earnings"> | Date | string
+  }
+
   export type user_snapshotsUpsertWithWhereUniqueWithoutEpoch_snapshotsInput = {
     where: user_snapshotsWhereUniqueInput
     update: XOR<user_snapshotsUpdateWithoutEpoch_snapshotsInput, user_snapshotsUncheckedUpdateWithoutEpoch_snapshotsInput>
@@ -18032,6 +19651,7 @@ export namespace Prisma {
     id?: string
     epoch: number
     snapshot_time?: Date | string
+    user_earnings?: user_earningsCreateNestedManyWithoutEpoch_snapshotsInput
     user_snapshots?: user_snapshotsCreateNestedManyWithoutEpoch_snapshotsInput
   }
 
@@ -18039,6 +19659,7 @@ export namespace Prisma {
     id?: string
     epoch: number
     snapshot_time?: Date | string
+    user_earnings?: user_earningsUncheckedCreateNestedManyWithoutEpoch_snapshotsInput
     user_snapshots?: user_snapshotsUncheckedCreateNestedManyWithoutEpoch_snapshotsInput
   }
 
@@ -18062,6 +19683,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     epoch?: IntFieldUpdateOperationsInput | number
     snapshot_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    user_earnings?: user_earningsUpdateManyWithoutEpoch_snapshotsNestedInput
     user_snapshots?: user_snapshotsUpdateManyWithoutEpoch_snapshotsNestedInput
   }
 
@@ -18069,6 +19691,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     epoch?: IntFieldUpdateOperationsInput | number
     snapshot_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    user_earnings?: user_earningsUncheckedUpdateManyWithoutEpoch_snapshotsNestedInput
     user_snapshots?: user_snapshotsUncheckedUpdateManyWithoutEpoch_snapshotsNestedInput
   }
 
@@ -18077,6 +19700,7 @@ export namespace Prisma {
     epoch: number
     snapshot_time?: Date | string
     lst_strategy?: lst_strategyCreateNestedOneWithoutEpoch_snapshotsInput
+    user_earnings?: user_earningsCreateNestedManyWithoutEpoch_snapshotsInput
   }
 
   export type epoch_snapshotsUncheckedCreateWithoutUser_snapshotsInput = {
@@ -18084,6 +19708,7 @@ export namespace Prisma {
     epoch: number
     snapshot_time?: Date | string
     lst_strategy?: lst_strategyUncheckedCreateNestedOneWithoutEpoch_snapshotsInput
+    user_earnings?: user_earningsUncheckedCreateNestedManyWithoutEpoch_snapshotsInput
   }
 
   export type epoch_snapshotsCreateOrConnectWithoutUser_snapshotsInput = {
@@ -18096,6 +19721,7 @@ export namespace Prisma {
     created_at?: Date | string
     privy_id?: string | null
     deposits?: depositsCreateNestedManyWithoutUsersInput
+    user_earnings?: user_earningsCreateNestedManyWithoutUsersInput
     withdrawals?: withdrawalsCreateNestedManyWithoutUsersInput
   }
 
@@ -18104,6 +19730,7 @@ export namespace Prisma {
     created_at?: Date | string
     privy_id?: string | null
     deposits?: depositsUncheckedCreateNestedManyWithoutUsersInput
+    user_earnings?: user_earningsUncheckedCreateNestedManyWithoutUsersInput
     withdrawals?: withdrawalsUncheckedCreateNestedManyWithoutUsersInput
   }
 
@@ -18128,6 +19755,7 @@ export namespace Prisma {
     epoch?: IntFieldUpdateOperationsInput | number
     snapshot_time?: DateTimeFieldUpdateOperationsInput | Date | string
     lst_strategy?: lst_strategyUpdateOneWithoutEpoch_snapshotsNestedInput
+    user_earnings?: user_earningsUpdateManyWithoutEpoch_snapshotsNestedInput
   }
 
   export type epoch_snapshotsUncheckedUpdateWithoutUser_snapshotsInput = {
@@ -18135,6 +19763,7 @@ export namespace Prisma {
     epoch?: IntFieldUpdateOperationsInput | number
     snapshot_time?: DateTimeFieldUpdateOperationsInput | Date | string
     lst_strategy?: lst_strategyUncheckedUpdateOneWithoutEpoch_snapshotsNestedInput
+    user_earnings?: user_earningsUncheckedUpdateManyWithoutEpoch_snapshotsNestedInput
   }
 
   export type usersUpsertWithoutUser_snapshotsInput = {
@@ -18153,6 +19782,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     privy_id?: NullableStringFieldUpdateOperationsInput | string | null
     deposits?: depositsUpdateManyWithoutUsersNestedInput
+    user_earnings?: user_earningsUpdateManyWithoutUsersNestedInput
     withdrawals?: withdrawalsUpdateManyWithoutUsersNestedInput
   }
 
@@ -18161,12 +19791,13 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     privy_id?: NullableStringFieldUpdateOperationsInput | string | null
     deposits?: depositsUncheckedUpdateManyWithoutUsersNestedInput
+    user_earnings?: user_earningsUncheckedUpdateManyWithoutUsersNestedInput
     withdrawals?: withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
   }
 
   export type depositsCreateWithoutUsersInput = {
     id?: string
-    amount_sol: Decimal | DecimalJsLike | number | string
+    amount: Decimal | DecimalJsLike | number | string
     type: string
     source_chain: string
     tx_hash: string
@@ -18175,7 +19806,7 @@ export namespace Prisma {
 
   export type depositsUncheckedCreateWithoutUsersInput = {
     id?: string
-    amount_sol: Decimal | DecimalJsLike | number | string
+    amount: Decimal | DecimalJsLike | number | string
     type: string
     source_chain: string
     tx_hash: string
@@ -18189,6 +19820,30 @@ export namespace Prisma {
 
   export type depositsCreateManyUsersInputEnvelope = {
     data: depositsCreateManyUsersInput | depositsCreateManyUsersInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type user_earningsCreateWithoutUsersInput = {
+    id?: string
+    earned_value: Decimal | DecimalJsLike | number | string
+    calculated_at?: Date | string
+    epoch_snapshots: epoch_snapshotsCreateNestedOneWithoutUser_earningsInput
+  }
+
+  export type user_earningsUncheckedCreateWithoutUsersInput = {
+    id?: string
+    epoch_snapshot_id: string
+    earned_value: Decimal | DecimalJsLike | number | string
+    calculated_at?: Date | string
+  }
+
+  export type user_earningsCreateOrConnectWithoutUsersInput = {
+    where: user_earningsWhereUniqueInput
+    create: XOR<user_earningsCreateWithoutUsersInput, user_earningsUncheckedCreateWithoutUsersInput>
+  }
+
+  export type user_earningsCreateManyUsersInputEnvelope = {
+    data: user_earningsCreateManyUsersInput | user_earningsCreateManyUsersInput[]
     skipDuplicates?: boolean
   }
 
@@ -18218,7 +19873,7 @@ export namespace Prisma {
 
   export type withdrawalsCreateWithoutUsersInput = {
     id?: string
-    amount_sol: Decimal | DecimalJsLike | number | string
+    amount: Decimal | DecimalJsLike | number | string
     type: string
     destination_chain: string
     tx_hash?: string | null
@@ -18227,7 +19882,7 @@ export namespace Prisma {
 
   export type withdrawalsUncheckedCreateWithoutUsersInput = {
     id?: string
-    amount_sol: Decimal | DecimalJsLike | number | string
+    amount: Decimal | DecimalJsLike | number | string
     type: string
     destination_chain: string
     tx_hash?: string | null
@@ -18266,11 +19921,27 @@ export namespace Prisma {
     NOT?: depositsScalarWhereInput | depositsScalarWhereInput[]
     id?: UuidFilter<"deposits"> | string
     user_id?: UuidFilter<"deposits"> | string
-    amount_sol?: DecimalFilter<"deposits"> | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFilter<"deposits"> | Decimal | DecimalJsLike | number | string
     type?: StringFilter<"deposits"> | string
     source_chain?: StringFilter<"deposits"> | string
     tx_hash?: StringFilter<"deposits"> | string
     deposited_at?: DateTimeFilter<"deposits"> | Date | string
+  }
+
+  export type user_earningsUpsertWithWhereUniqueWithoutUsersInput = {
+    where: user_earningsWhereUniqueInput
+    update: XOR<user_earningsUpdateWithoutUsersInput, user_earningsUncheckedUpdateWithoutUsersInput>
+    create: XOR<user_earningsCreateWithoutUsersInput, user_earningsUncheckedCreateWithoutUsersInput>
+  }
+
+  export type user_earningsUpdateWithWhereUniqueWithoutUsersInput = {
+    where: user_earningsWhereUniqueInput
+    data: XOR<user_earningsUpdateWithoutUsersInput, user_earningsUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type user_earningsUpdateManyWithWhereWithoutUsersInput = {
+    where: user_earningsScalarWhereInput
+    data: XOR<user_earningsUpdateManyMutationInput, user_earningsUncheckedUpdateManyWithoutUsersInput>
   }
 
   export type user_snapshotsUpsertWithWhereUniqueWithoutUsersInput = {
@@ -18311,7 +19982,7 @@ export namespace Prisma {
     NOT?: withdrawalsScalarWhereInput | withdrawalsScalarWhereInput[]
     id?: UuidFilter<"withdrawals"> | string
     user_id?: UuidFilter<"withdrawals"> | string
-    amount_sol?: DecimalFilter<"withdrawals"> | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFilter<"withdrawals"> | Decimal | DecimalJsLike | number | string
     type?: StringFilter<"withdrawals"> | string
     destination_chain?: StringFilter<"withdrawals"> | string
     tx_hash?: StringNullableFilter<"withdrawals"> | string | null
@@ -18323,6 +19994,7 @@ export namespace Prisma {
     created_at?: Date | string
     privy_id?: string | null
     deposits?: depositsCreateNestedManyWithoutUsersInput
+    user_earnings?: user_earningsCreateNestedManyWithoutUsersInput
     user_snapshots?: user_snapshotsCreateNestedManyWithoutUsersInput
   }
 
@@ -18331,6 +20003,7 @@ export namespace Prisma {
     created_at?: Date | string
     privy_id?: string | null
     deposits?: depositsUncheckedCreateNestedManyWithoutUsersInput
+    user_earnings?: user_earningsUncheckedCreateNestedManyWithoutUsersInput
     user_snapshots?: user_snapshotsUncheckedCreateNestedManyWithoutUsersInput
   }
 
@@ -18355,6 +20028,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     privy_id?: NullableStringFieldUpdateOperationsInput | string | null
     deposits?: depositsUpdateManyWithoutUsersNestedInput
+    user_earnings?: user_earningsUpdateManyWithoutUsersNestedInput
     user_snapshots?: user_snapshotsUpdateManyWithoutUsersNestedInput
   }
 
@@ -18363,7 +20037,115 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     privy_id?: NullableStringFieldUpdateOperationsInput | string | null
     deposits?: depositsUncheckedUpdateManyWithoutUsersNestedInput
+    user_earnings?: user_earningsUncheckedUpdateManyWithoutUsersNestedInput
     user_snapshots?: user_snapshotsUncheckedUpdateManyWithoutUsersNestedInput
+  }
+
+  export type epoch_snapshotsCreateWithoutUser_earningsInput = {
+    id?: string
+    epoch: number
+    snapshot_time?: Date | string
+    lst_strategy?: lst_strategyCreateNestedOneWithoutEpoch_snapshotsInput
+    user_snapshots?: user_snapshotsCreateNestedManyWithoutEpoch_snapshotsInput
+  }
+
+  export type epoch_snapshotsUncheckedCreateWithoutUser_earningsInput = {
+    id?: string
+    epoch: number
+    snapshot_time?: Date | string
+    lst_strategy?: lst_strategyUncheckedCreateNestedOneWithoutEpoch_snapshotsInput
+    user_snapshots?: user_snapshotsUncheckedCreateNestedManyWithoutEpoch_snapshotsInput
+  }
+
+  export type epoch_snapshotsCreateOrConnectWithoutUser_earningsInput = {
+    where: epoch_snapshotsWhereUniqueInput
+    create: XOR<epoch_snapshotsCreateWithoutUser_earningsInput, epoch_snapshotsUncheckedCreateWithoutUser_earningsInput>
+  }
+
+  export type usersCreateWithoutUser_earningsInput = {
+    id?: string
+    created_at?: Date | string
+    privy_id?: string | null
+    deposits?: depositsCreateNestedManyWithoutUsersInput
+    user_snapshots?: user_snapshotsCreateNestedManyWithoutUsersInput
+    withdrawals?: withdrawalsCreateNestedManyWithoutUsersInput
+  }
+
+  export type usersUncheckedCreateWithoutUser_earningsInput = {
+    id?: string
+    created_at?: Date | string
+    privy_id?: string | null
+    deposits?: depositsUncheckedCreateNestedManyWithoutUsersInput
+    user_snapshots?: user_snapshotsUncheckedCreateNestedManyWithoutUsersInput
+    withdrawals?: withdrawalsUncheckedCreateNestedManyWithoutUsersInput
+  }
+
+  export type usersCreateOrConnectWithoutUser_earningsInput = {
+    where: usersWhereUniqueInput
+    create: XOR<usersCreateWithoutUser_earningsInput, usersUncheckedCreateWithoutUser_earningsInput>
+  }
+
+  export type epoch_snapshotsUpsertWithoutUser_earningsInput = {
+    update: XOR<epoch_snapshotsUpdateWithoutUser_earningsInput, epoch_snapshotsUncheckedUpdateWithoutUser_earningsInput>
+    create: XOR<epoch_snapshotsCreateWithoutUser_earningsInput, epoch_snapshotsUncheckedCreateWithoutUser_earningsInput>
+    where?: epoch_snapshotsWhereInput
+  }
+
+  export type epoch_snapshotsUpdateToOneWithWhereWithoutUser_earningsInput = {
+    where?: epoch_snapshotsWhereInput
+    data: XOR<epoch_snapshotsUpdateWithoutUser_earningsInput, epoch_snapshotsUncheckedUpdateWithoutUser_earningsInput>
+  }
+
+  export type epoch_snapshotsUpdateWithoutUser_earningsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    epoch?: IntFieldUpdateOperationsInput | number
+    snapshot_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    lst_strategy?: lst_strategyUpdateOneWithoutEpoch_snapshotsNestedInput
+    user_snapshots?: user_snapshotsUpdateManyWithoutEpoch_snapshotsNestedInput
+  }
+
+  export type epoch_snapshotsUncheckedUpdateWithoutUser_earningsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    epoch?: IntFieldUpdateOperationsInput | number
+    snapshot_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    lst_strategy?: lst_strategyUncheckedUpdateOneWithoutEpoch_snapshotsNestedInput
+    user_snapshots?: user_snapshotsUncheckedUpdateManyWithoutEpoch_snapshotsNestedInput
+  }
+
+  export type usersUpsertWithoutUser_earningsInput = {
+    update: XOR<usersUpdateWithoutUser_earningsInput, usersUncheckedUpdateWithoutUser_earningsInput>
+    create: XOR<usersCreateWithoutUser_earningsInput, usersUncheckedCreateWithoutUser_earningsInput>
+    where?: usersWhereInput
+  }
+
+  export type usersUpdateToOneWithWhereWithoutUser_earningsInput = {
+    where?: usersWhereInput
+    data: XOR<usersUpdateWithoutUser_earningsInput, usersUncheckedUpdateWithoutUser_earningsInput>
+  }
+
+  export type usersUpdateWithoutUser_earningsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    privy_id?: NullableStringFieldUpdateOperationsInput | string | null
+    deposits?: depositsUpdateManyWithoutUsersNestedInput
+    user_snapshots?: user_snapshotsUpdateManyWithoutUsersNestedInput
+    withdrawals?: withdrawalsUpdateManyWithoutUsersNestedInput
+  }
+
+  export type usersUncheckedUpdateWithoutUser_earningsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    privy_id?: NullableStringFieldUpdateOperationsInput | string | null
+    deposits?: depositsUncheckedUpdateManyWithoutUsersNestedInput
+    user_snapshots?: user_snapshotsUncheckedUpdateManyWithoutUsersNestedInput
+    withdrawals?: withdrawalsUncheckedUpdateManyWithoutUsersNestedInput
+  }
+
+  export type user_earningsCreateManyEpoch_snapshotsInput = {
+    id?: string
+    user_id: string
+    earned_value: Decimal | DecimalJsLike | number | string
+    calculated_at?: Date | string
   }
 
   export type user_snapshotsCreateManyEpoch_snapshotsInput = {
@@ -18371,6 +20153,27 @@ export namespace Prisma {
     user_id: string
     current_position: string
     sol_value: Decimal | DecimalJsLike | number | string
+  }
+
+  export type user_earningsUpdateWithoutEpoch_snapshotsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    earned_value?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    calculated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: usersUpdateOneRequiredWithoutUser_earningsNestedInput
+  }
+
+  export type user_earningsUncheckedUpdateWithoutEpoch_snapshotsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    earned_value?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    calculated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type user_earningsUncheckedUpdateManyWithoutEpoch_snapshotsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    earned_value?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    calculated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type user_snapshotsUpdateWithoutEpoch_snapshotsInput = {
@@ -18396,11 +20199,18 @@ export namespace Prisma {
 
   export type depositsCreateManyUsersInput = {
     id?: string
-    amount_sol: Decimal | DecimalJsLike | number | string
+    amount: Decimal | DecimalJsLike | number | string
     type: string
     source_chain: string
     tx_hash: string
     deposited_at?: Date | string
+  }
+
+  export type user_earningsCreateManyUsersInput = {
+    id?: string
+    epoch_snapshot_id: string
+    earned_value: Decimal | DecimalJsLike | number | string
+    calculated_at?: Date | string
   }
 
   export type user_snapshotsCreateManyUsersInput = {
@@ -18412,7 +20222,7 @@ export namespace Prisma {
 
   export type withdrawalsCreateManyUsersInput = {
     id?: string
-    amount_sol: Decimal | DecimalJsLike | number | string
+    amount: Decimal | DecimalJsLike | number | string
     type: string
     destination_chain: string
     tx_hash?: string | null
@@ -18421,7 +20231,7 @@ export namespace Prisma {
 
   export type depositsUpdateWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount_sol?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: StringFieldUpdateOperationsInput | string
     source_chain?: StringFieldUpdateOperationsInput | string
     tx_hash?: StringFieldUpdateOperationsInput | string
@@ -18430,7 +20240,7 @@ export namespace Prisma {
 
   export type depositsUncheckedUpdateWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount_sol?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: StringFieldUpdateOperationsInput | string
     source_chain?: StringFieldUpdateOperationsInput | string
     tx_hash?: StringFieldUpdateOperationsInput | string
@@ -18439,11 +20249,32 @@ export namespace Prisma {
 
   export type depositsUncheckedUpdateManyWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount_sol?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: StringFieldUpdateOperationsInput | string
     source_chain?: StringFieldUpdateOperationsInput | string
     tx_hash?: StringFieldUpdateOperationsInput | string
     deposited_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type user_earningsUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    earned_value?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    calculated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    epoch_snapshots?: epoch_snapshotsUpdateOneRequiredWithoutUser_earningsNestedInput
+  }
+
+  export type user_earningsUncheckedUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    epoch_snapshot_id?: StringFieldUpdateOperationsInput | string
+    earned_value?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    calculated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type user_earningsUncheckedUpdateManyWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    epoch_snapshot_id?: StringFieldUpdateOperationsInput | string
+    earned_value?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    calculated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type user_snapshotsUpdateWithoutUsersInput = {
@@ -18469,7 +20300,7 @@ export namespace Prisma {
 
   export type withdrawalsUpdateWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount_sol?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: StringFieldUpdateOperationsInput | string
     destination_chain?: StringFieldUpdateOperationsInput | string
     tx_hash?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18478,7 +20309,7 @@ export namespace Prisma {
 
   export type withdrawalsUncheckedUpdateWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount_sol?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: StringFieldUpdateOperationsInput | string
     destination_chain?: StringFieldUpdateOperationsInput | string
     tx_hash?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18487,7 +20318,7 @@ export namespace Prisma {
 
   export type withdrawalsUncheckedUpdateManyWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount_sol?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     type?: StringFieldUpdateOperationsInput | string
     destination_chain?: StringFieldUpdateOperationsInput | string
     tx_hash?: NullableStringFieldUpdateOperationsInput | string | null
