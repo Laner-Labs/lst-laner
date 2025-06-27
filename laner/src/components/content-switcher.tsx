@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import EarningsChart from './earnings-chart';
-import AssetsContent from './assets-content';
+import AssetPortfolio from './assets-content';
 import ActivityContent from './activity-content';
 
 interface ContentSwitcherProps {
@@ -16,7 +16,7 @@ export default function ContentSwitcher({ activeTab }: ContentSwitcherProps) {
       case 'analysis':
         return <EarningsChart key="analysis" />;
       case 'assets':
-        return <AssetsContent key="assets" />;
+        return <AssetPortfolio key="assets" />;
       case 'activity':
         return <ActivityContent key="activity" />;
       default:

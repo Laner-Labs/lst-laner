@@ -51,7 +51,7 @@ export default function TabSwitcher({ activeTab, onTabChange }: TabSwitcherProps
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
-            className={`relative z-10 px-8 py-3 text-sm font-medium rounded-full transition-colors duration-300 min-w-[100px] ${
+            className={`relative z-10 px-8 py-3 text-sm font-medium rounded-full transition-colors duration-300 min-w-[100px] cursor-pointer ${
               activeTab === tab.id
                 ? 'text-rich-black'
                 : 'text-white/60 hover:text-white/80'

@@ -27,12 +27,23 @@ export interface EarningsHistoryData {
   bars: EarningsBar[];
 }
 
+export interface WalletAsset {
+  symbol: string;
+  name: string;
+  balance: number;
+  marketPrice: number;
+  totalValue: number;
+  status: 'Active' | 'Inactive';
+  logo?: string;
+  mintAddress?: string;
+}
+
 export const portfolioApi = createApi({
   reducerPath: 'portfolioApi',
   baseQuery: fetchBaseQuery({
     baseUrl: '/api/',
   }),
-  tagTypes: ['Portfolio', 'Earnings', 'EarningsHistory'],
+  tagTypes: ['Portfolio', 'Earnings', 'EarningsHistory', 'WalletAssets'],
   endpoints: (builder) => ({
     getPortfolio: builder.query<PortfolioData, string>({
       query: (privyId) => `portfolio?privyId=${privyId}`,
@@ -46,7 +57,11 @@ export const portfolioApi = createApi({
       query: ({ privyId, mode }) => `user/earnings?privyId=${privyId}&mode=${mode}`,
       providesTags: ['EarningsHistory'],
     }),
+    getWalletAssets: builder.query<WalletAsset[], { privyId: string; walletAddress: string }>({
+      query: ({ privyId, walletAddress }) => `assets/wallet?privyId=${privyId}&walletAddress=${walletAddress}`,
+      providesTags: ['WalletAssets'],
+    }),
   }),
 });
 
-export const { useGetPortfolioQuery, useGetEarningsQuery, useGetEarningsHistoryQuery } = portfolioApi; 
+export const { useGetPortfolioQuery, useGetEarningsQuery, useGetEarningsHistoryQuery, useGetWalletAssetsQuery } = portfolioApi; 
