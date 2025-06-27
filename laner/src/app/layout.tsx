@@ -4,6 +4,7 @@ import "./globals.css";
 import PrivyAppProvider from "@/providers/privy-provider";
 import { Toaster } from 'sonner'
 import WalletProvider from "@/providers/wallet-provider";
+import ReduxProvider from "@/providers/redux-provider";
 
 const bricolageGrotesque = Bricolage_Grotesque({
   variable: "--font-bricolage-grotesque",
@@ -23,11 +24,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${bricolageGrotesque.variable}`}>
       <body>
-        <PrivyAppProvider>
-          <WalletProvider>
-            {children}
+        <ReduxProvider>
+          <PrivyAppProvider>
+            <WalletProvider>
+              {children}
             </WalletProvider>
           </PrivyAppProvider>
+        </ReduxProvider>
         <Toaster />
       </body>
     </html>

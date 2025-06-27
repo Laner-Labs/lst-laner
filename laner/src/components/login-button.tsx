@@ -9,8 +9,23 @@ export default function LoginButton() {
   const router = useRouter();
     
   const { login } = useLogin({
-    onComplete: (user) => {
+    onComplete: async (user) => {
         console.log('User logged in successfully', user);
+        
+        try {
+          fetch('/api/auth', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              privyId: user.user.id,
+            }),
+          });
+        } catch (error) {
+          console.error('Error calling auth API:', error);
+        }
+        
         router.push('/dashboard');
     },
     onError: (error) => {
